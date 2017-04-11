@@ -1,0 +1,56 @@
+apply plugin: 'com.jfrog.bintray'
+
+Properties gradleProperties = new Properties()
+gradleProperties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+
+version = gradleProperties.getProperty("PROJ_VERSION")
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = gradleProperties.getProperty("PROJ_REPO")
+        name = gradleProperties.getProperty("PROJ_NAME")
+        desc = gradleProperties.getProperty("PROJ_DESCRIPTION")
+        vcsUrl = gradleProperties.getProperty("PROJ_WEBSITEURL")
+        websiteUrl = gradleProperties.getProperty("PROJ_ISSUETRACKERURL")
+        issueTrackerUrl = gradleProperties.getProperty("PROJ_VCSURL")
+        licenses = ["Apache-2.0"]
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            desc = gradleProperties.getProperty("PROJ_DESCRIPTION")
+            // Optional. The passphrase for GPG signing'
+            // gpg {
+            //    sign = true //Determines whether to GPG sign the files. The default is false
+            //    passphrase = properties.getProperty("bintray.gpg.password")
+            //}
+        }
+    }
+}
