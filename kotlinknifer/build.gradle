@@ -33,5 +33,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-apply from: "https://raw.githubusercontent.com/pokk/KotlinKinfer/master/jcenter-bintray.gradle"
-apply from: "https://raw.githubusercontent.com/pokk/KotlinKinfer/master/jcenter-install.gradle"
+apply from: "https://raw.githubusercontent.com/pokk/KotlinKnifer/master/jcenter-bintray.gradle"
+apply from: "https://raw.githubusercontent.com/pokk/KotlinKnifer/master/jcenter-install.gradle"

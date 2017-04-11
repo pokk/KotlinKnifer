@@ -13,7 +13,7 @@ install {
                 artifactId gradleProperties.getProperty("PROJ_ARTIFACTID")
 
                 // Add your description here
-                name gradleProperties.getProperty("RapidKot")
+                name gradleProperties.getProperty("PROJ_NAME")
                 description gradleProperties.getProperty("PROJ_DESCRIPTION")
 
                 developers {
