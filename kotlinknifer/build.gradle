@@ -33,29 +33,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'kotlinknifer'
-
-    publishedGroupId = 'com.devrapid.jieyi'
-    libraryName = 'KotlinKnifer'
-    artifact = 'kotlinknifer'
-
-    libraryDescription = 'For developing an Android project rapidly.'
-
-    siteUrl = 'https://github.com/pokk/KotlinKnifer'
-    gitUrl = 'https://github.com/pokk/KotlinKnifer.git'
-
-    libraryVersion = '0.0.1'
-
-    developerId = 'pokk'
-    developerName = 'Jieyi Wu'
-    developerEmail = 'pokkbaby@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+apply from: 'https://raw.githubusercontent.com/pokk/JCenterUploader/master/Uploader.gradle'
