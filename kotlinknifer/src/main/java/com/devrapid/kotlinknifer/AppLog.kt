@@ -1,4 +1,4 @@
-package taiwan.no1.app.utilies
+package com.devrapid.kotlinknifer
 
 import android.util.Log
 
@@ -131,7 +131,7 @@ object AppLog {
      * @return output string message
      */
     private fun combineInputArguments(vararg values: Any?): String = this.newCombinedString {
-        values.filter { null != it }.forEach { this.append(it.toString()).append(SPACE_STRING) }
+        values.filter { null != it }.forEach { this.append(it.toString()).append(com.devrapid.kotlinknifer.AppLog.SPACE_STRING) }
     }
 
     /**
@@ -166,11 +166,11 @@ object AppLog {
 
         return this.newCombinedString {
             append(ste[stackIndex].methodName)
-            append(LEFT_PARENTHESIS)
+            append(com.devrapid.kotlinknifer.AppLog.LEFT_PARENTHESIS)
             append(ste[stackIndex].fileName)
-            append(COLON)
+            append(com.devrapid.kotlinknifer.AppLog.COLON)
             append(ste[stackIndex].lineNumber)
-            append(RIGHT_PARENTHESIS)
+            append(com.devrapid.kotlinknifer.AppLog.RIGHT_PARENTHESIS)
         }
     }
 }
