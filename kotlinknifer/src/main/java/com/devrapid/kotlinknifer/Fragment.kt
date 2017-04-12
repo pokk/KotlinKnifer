@@ -5,6 +5,7 @@ package com.devrapid.kotlinknifer
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.view.View
+import taiwan.no1.app.utilies.AppLog
 import java.util.*
 
 /**
@@ -67,9 +68,12 @@ fun FragmentManager.removeRecursiveFragment() = this.fragments?.forEach {
     }
 }
 
-//fun FragmentManager.showAllFragment() = this.fragments?.forEach {
-//    it?.let {
-//        AppLog.v("parent : $it")
-//        it.childFragmentManager?.fragments?.forEach { AppLog.d("child!!!! : $it") }
-//    }
-//}
+/**
+ * Testing code. For showing all fragments and children fragments.
+ */
+fun FragmentManager.showAllFragment() = this.fragments?.forEach {
+    it?.let {
+        AppLog.v("parent : $it")
+        it.childFragmentManager?.fragments?.forEach { AppLog.d("child!!!! : $it") }
+    }
+}
