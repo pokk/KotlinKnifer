@@ -5,7 +5,6 @@ package com.devrapid.kotlinknifer
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.view.View
-import java.util.*
 
 /**
  * @author  jieyi

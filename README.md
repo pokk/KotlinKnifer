@@ -20,7 +20,7 @@ And add the dependency.
 
 
 ```gradle
-compile 'com.devrapid.jieyi:kotlinknifer:0.0.2'
+compile 'com.devrapid.jieyi:kotlinknifer:0.0.4'
 ```
 
 Then you can use it!!!
