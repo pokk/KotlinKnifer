@@ -26,7 +26,7 @@ fun FragmentManager.addFragment(containerViewId: Int,
                                 needBack: Boolean = false,
                                 sharedElements: HashMap<View, String>? = null): Int = this.beginTransaction().also {
     it.replace(containerViewId, fragment, fragment.javaClass.name)
-    sharedElements?.forEach { k, v -> it.addSharedElement(k, v) }
+    sharedElements?.forEach { value -> it.addSharedElement(value.key, value.value) }
     if (needBack)
         it.addToBackStack(fragment.javaClass.name)
 }.commit()
