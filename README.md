@@ -1,26 +1,28 @@
 # KotlinKnifer
 
+The library has util tools as below:
+
+1. Log
+2. Fragment
+
 # Download
 
 ## Gradle
 
-First you have to add them to project `bundle.gradle` as below:
+First you have to make sure your project `bundle.gradle` as below:
 
-```
+```gradle
 allprojects {
     repositories {
         jcenter()
-
-        maven { url 'https://dl.bintray.com/pokk/maven' }
     }
 }
 ```
 
-And add the dependency.
-
+And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-compile 'com.devrapid.jieyi:kotlinknifer:0.0.5'
+compile 'com.devrapid.jieyi:kotlinknifer:0.0.7'
 ```
 
 Then you can use it!!!
@@ -31,7 +33,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.7</version>
   <type>pom</type>
 </dependency>
 ```
