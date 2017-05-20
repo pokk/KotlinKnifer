@@ -9,17 +9,17 @@ import android.util.Log
  * @since 8/1/15
  */
 
-fun v(vararg msg: Any?): Unit = AppLog.v(*msg)
+fun logv(vararg msg: Any?): Unit = AppLog.v(*msg)
 
-fun d(vararg msg: Any?): Unit = AppLog.d(*msg)
+fun logd(vararg msg: Any?): Unit = AppLog.d(*msg)
 
-fun i(vararg msg: Any?): Unit = AppLog.i(*msg)
+fun logi(vararg msg: Any?): Unit = AppLog.i(*msg)
 
-fun w(vararg msg: Any?): Unit = AppLog.w(*msg)
+fun logw(vararg msg: Any?): Unit = AppLog.w(*msg)
 
-fun e(vararg msg: Any?): Unit = AppLog.e(*msg)
+fun loge(vararg msg: Any?): Unit = AppLog.e(*msg)
 
-object AppLog {
+internal object AppLog {
     var _IS_DEBUG: Boolean = java.lang.Boolean.TRUE  // Debug mode's switch, default is turn off.
     var TAG: String = "MY_LOG"  // TAG
 
