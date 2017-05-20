@@ -9,6 +9,16 @@ import android.util.Log
  * @since 8/1/15
  */
 
+fun v(vararg msg: Any?): Unit = AppLog.v(*msg)
+
+fun d(vararg msg: Any?): Unit = AppLog.d(*msg)
+
+fun i(vararg msg: Any?): Unit = AppLog.i(*msg)
+
+fun w(vararg msg: Any?): Unit = AppLog.w(*msg)
+
+fun e(vararg msg: Any?): Unit = AppLog.e(*msg)
+
 object AppLog {
     var _IS_DEBUG: Boolean = java.lang.Boolean.TRUE  // Debug mode's switch, default is turn off.
     var TAG: String = "MY_LOG"  // TAG
@@ -17,6 +27,7 @@ object AppLog {
     private const val LEFT_PARENTHESIS: String = "("
     private const val RIGHT_PARENTHESIS: String = ")"
     private const val SPACE_STRING: String = " "
+    private const val METHOD_INDEX: Int = 5
     private val lockLog: Any = Any()  // Avoid the threading's race condition.
     private val strBuilder: StringBuilder = StringBuilder()  // String builder.
 
@@ -25,35 +36,35 @@ object AppLog {
      *
      * @param msg output message
      */
-    @JvmStatic fun v(vararg msg: Any?) = this.showLog(*msg)
+    internal fun v(vararg msg: Any?) = this.showLog(*msg)
 
     /**
      * DEBUG log.
      *
      * @param msg output message
      */
-    @JvmStatic fun d(vararg msg: Any?) = this.showLog(*msg)
+    internal fun d(vararg msg: Any?) = this.showLog(*msg)
 
     /**
      * INFORMATION log.
      *
      * @param msg output message
      */
-    @JvmStatic fun i(vararg msg: Any?) = this.showLog(*msg)
+    internal fun i(vararg msg: Any?) = this.showLog(*msg)
 
     /**
      * WARNING log.
      *
      * @param msg output message
      */
-    @JvmStatic fun w(vararg msg: Any?) = this.showLog(*msg)
+    internal fun w(vararg msg: Any?) = this.showLog(*msg)
 
     /**
      * ERROR log.
      *
      * @param msg output message
      */
-    @JvmStatic fun e(vararg msg: Any?) {
+    internal fun e(vararg msg: Any?) {
         if (1 == msg.size && msg[0] is Exception)
             LogWrapper().debugCheck(Log::class.java, getExceptionMsg(msg[0] as Exception))
         else
@@ -75,10 +86,12 @@ object AppLog {
             // Checking the debug mode.
             if (_IS_DEBUG) {
                 // Because the level of the function depth, the index is 4. 
-                var methodName = Thread.currentThread().stackTrace[4].methodName
+                var methodName = Thread.currentThread().stackTrace[METHOD_INDEX].methodName
                 // Only exception msg only is 3.
                 if (1 < methodName.length)
-                    methodName = Thread.currentThread().stackTrace[3].methodName
+                    methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 1].methodName
+
+                Thread.currentThread().stackTrace.forEach { println(it) }
 
                 // Avoid the race condition.
                 synchronized(lockLog) {
@@ -98,6 +111,8 @@ object AppLog {
          */
         private fun logMsg(cls: Class<*>, methodName: String, msg: Any): Boolean {
             try {
+                cls.declaredMethods.forEach { println(it) }
+                println(methodName)
                 val method = cls.getDeclaredMethod(methodName, String::class.java, String::class.java)
                 method.invoke(null, TAG, msg)
             }
@@ -121,8 +136,8 @@ object AppLog {
         LogWrapper().debugCheck(Log::class.java, getLogMsg(msgString))
     }
 
-    private fun newCombinedString(block: StringBuilder.() -> Unit): String = this.strBuilder.apply { setLength(0) }.
-            apply(block).toString()
+    private fun newCombinedString(block: StringBuilder.() -> Unit): String =
+            this.strBuilder.apply { setLength(0) }.apply(block).toString()
 
     /**
      * Combine arguments to a string.
@@ -160,7 +175,7 @@ object AppLog {
      */
     private fun getMetaInfo(isNullString: Boolean): String {
         // Because the nest function so we can get in stack index 4. 
-        val tempIndex = 4
+        val tempIndex = METHOD_INDEX
         val stackIndex = if (isNullString) tempIndex + 1 else tempIndex
         val ste = Throwable().stackTrace
 
