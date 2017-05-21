@@ -85,13 +85,11 @@ internal object AppLog {
         fun debugCheck(cls: Class<*>, msg: Any): Boolean {
             // Checking the debug mode.
             if (_IS_DEBUG) {
-                // Because the level of the function depth, the index is 4. 
+                // Because the level of the function depth, the index is 5. 
                 var methodName = Thread.currentThread().stackTrace[METHOD_INDEX].methodName
                 // Only exception msg only is 3.
                 if (1 < methodName.length)
-                    methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 1].methodName
-
-                Thread.currentThread().stackTrace.forEach { println(it) }
+                    methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 2].methodName
 
                 // Avoid the race condition.
                 synchronized(lockLog) {
