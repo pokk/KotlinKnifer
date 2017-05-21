@@ -111,9 +111,9 @@ internal object AppLog {
          */
         private fun logMsg(cls: Class<*>, methodName: String, msg: Any): Boolean {
             try {
-                cls.declaredMethods.forEach { println(it) }
-                println(methodName)
-                val method = cls.getDeclaredMethod(methodName, String::class.java, String::class.java)
+                val method = cls.getDeclaredMethod(methodName.substringBefore("$"),
+                        String::class.java,
+                        String::class.java)
                 method.invoke(null, TAG, msg)
             }
             catch (e: Exception) {
