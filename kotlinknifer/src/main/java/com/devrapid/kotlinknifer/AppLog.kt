@@ -27,7 +27,7 @@ internal object AppLog {
     private const val LEFT_PARENTHESIS: String = "("
     private const val RIGHT_PARENTHESIS: String = ")"
     private const val SPACE_STRING: String = " "
-    private const val METHOD_INDEX: Int = 5
+    private const val METHOD_INDEX: Int = 4
     private val lockLog: Any = Any()  // Avoid the threading's race condition.
     private val strBuilder: StringBuilder = StringBuilder()  // String builder.
 
@@ -85,11 +85,12 @@ internal object AppLog {
         fun debugCheck(cls: Class<*>, msg: Any): Boolean {
             // Checking the debug mode.
             if (_IS_DEBUG) {
-                // Because the level of the function depth, the index is 5. 
-                var methodName = Thread.currentThread().stackTrace[METHOD_INDEX].methodName
+                // Because the level of the function depth, the index is 4. 
+                var methodName = Thread.currentThread().stackTrace[METHOD_INDEX].methodName.substringBefore("$")
+
                 // Only exception msg only is 3.
                 if (1 < methodName.length)
-                    methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 2].methodName
+                    methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 1].methodName.substringBefore("$")
 
                 // Avoid the race condition.
                 synchronized(lockLog) {
@@ -109,9 +110,7 @@ internal object AppLog {
          */
         private fun logMsg(cls: Class<*>, methodName: String, msg: Any): Boolean {
             try {
-                val method = cls.getDeclaredMethod(methodName.substringBefore("$"),
-                        String::class.java,
-                        String::class.java)
+                val method = cls.getDeclaredMethod(methodName, String::class.java, String::class.java)
                 method.invoke(null, TAG, msg)
             }
             catch (e: Exception) {
@@ -173,7 +172,7 @@ internal object AppLog {
      */
     private fun getMetaInfo(isNullString: Boolean): String {
         // Because the nest function so we can get in stack index 4. 
-        val tempIndex = METHOD_INDEX
+        val tempIndex = METHOD_INDEX + 1
         val stackIndex = if (isNullString) tempIndex + 1 else tempIndex
         val ste = Throwable().stackTrace
 
