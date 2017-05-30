@@ -9,17 +9,17 @@ import android.util.Log
  * @since 8/1/15
  */
 
-fun logv(vararg msg: Any?): Unit = AppLog.v(*msg)
+fun logv(vararg msg: Any?): Unit = Logs.v(*msg)
 
-fun logd(vararg msg: Any?): Unit = AppLog.d(*msg)
+fun logd(vararg msg: Any?): Unit = Logs.d(*msg)
 
-fun logi(vararg msg: Any?): Unit = AppLog.i(*msg)
+fun logi(vararg msg: Any?): Unit = Logs.i(*msg)
 
-fun logw(vararg msg: Any?): Unit = AppLog.w(*msg)
+fun logw(vararg msg: Any?): Unit = Logs.w(*msg)
 
-fun loge(vararg msg: Any?): Unit = AppLog.e(*msg)
+fun loge(vararg msg: Any?): Unit = Logs.e(*msg)
 
-internal object AppLog {
+internal object Logs {
     var _IS_DEBUG: Boolean = java.lang.Boolean.TRUE  // Debug mode's switch, default is turn off.
     var TAG: String = "MY_LOG"  // TAG
 
@@ -143,7 +143,7 @@ internal object AppLog {
      * @return output string message
      */
     private fun combineInputArguments(vararg values: Any?): String = this.newCombinedString {
-        values.filter { null != it }.forEach { this.append(it.toString()).append(com.devrapid.kotlinknifer.AppLog.SPACE_STRING) }
+        values.filter { null != it }.forEach { this.append(it.toString()).append(com.devrapid.kotlinknifer.Logs.SPACE_STRING) }
     }
 
     /**
@@ -178,11 +178,11 @@ internal object AppLog {
 
         return this.newCombinedString {
             append(ste[stackIndex].methodName)
-            append(com.devrapid.kotlinknifer.AppLog.LEFT_PARENTHESIS)
+            append(com.devrapid.kotlinknifer.Logs.LEFT_PARENTHESIS)
             append(ste[stackIndex].fileName)
-            append(com.devrapid.kotlinknifer.AppLog.COLON)
+            append(com.devrapid.kotlinknifer.Logs.COLON)
             append(ste[stackIndex].lineNumber)
-            append(com.devrapid.kotlinknifer.AppLog.RIGHT_PARENTHESIS)
+            append(com.devrapid.kotlinknifer.Logs.RIGHT_PARENTHESIS)
         }
     }
 }

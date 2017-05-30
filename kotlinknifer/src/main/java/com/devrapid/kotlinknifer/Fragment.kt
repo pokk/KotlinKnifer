@@ -71,7 +71,7 @@ fun FragmentManager.removeRecursiveFragment() = this.fragments?.forEach {
  */
 fun FragmentManager.showAllFragment() = this.fragments?.forEach {
     it?.let {
-        AppLog.v("parent : $it")
-        it.childFragmentManager?.fragments?.forEach { AppLog.d("child!!!! : $it") }
+        Logs.v("parent : $it")
+        it.childFragmentManager?.fragments?.forEach { Logs.d("child!!!! : $it") }
     }
 }
