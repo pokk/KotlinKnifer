@@ -22,7 +22,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-compile 'com.devrapid.jieyi:kotlinknifer:0.0.7'
+compile 'com.devrapid.jieyi:kotlinknifer:0.1.0'
 ```
 
 Then you can use it!!!
