@@ -10,10 +10,9 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        logw("hello world")
-//        logv("hello world")
-//        loge("hello world")
-//        logi("hello world")
+        val tv = findViewById(R.id.tv_text)
+        
+        
         logd("hello world")
         logd()
         loge("gere")
