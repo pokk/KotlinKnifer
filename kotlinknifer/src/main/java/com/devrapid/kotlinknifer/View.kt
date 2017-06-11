@@ -2,11 +2,14 @@
 
 package com.devrapid.kotlinknifer
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewTreeObserver
+import com.example.kotlinknifer.R
 
 /**
  * @author  jieyi
@@ -54,6 +57,22 @@ fun View.waitForMeasure(func: (v: View, w: Int, h: Int) -> Unit) {
 
     this.viewTreeObserver.addOnPreDrawListener(listener)
 }
+
+fun Context.alert(message: String, title: String? = null, init: (AlertDialog.Builder.() -> Unit)? = null) =
+    AlertDialog.Builder(this).apply {
+        this@alert.setTheme(R.style.Base_Theme_AppCompat_Dialog_Alert)
+        title?.let { this.setTitle(title) }
+        this.setMessage(message)
+        init?.let { init() }
+    }
+
+fun Context.alert(message: Int, title: Int? = null, init: (AlertDialog.Builder.() -> Unit)? = null) =
+    AlertDialog.Builder(this).apply {
+        this@alert.setTheme(R.style.Base_Theme_AppCompat_Dialog_Alert)
+        title?.let { this.setTitle(title) }
+        this.setMessage(message)
+        init?.let { init() }
+    }
 
 fun Bitmap.resizeImageAsRatio(aspectRatio: Double): Bitmap = this.also {
     val ratio: Double = it.width.toDouble() / it.height.toDouble()
