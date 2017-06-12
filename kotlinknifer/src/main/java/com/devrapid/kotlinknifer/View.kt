@@ -51,6 +51,8 @@ fun View.waitForMeasure(func: (v: View, w: Int, h: Int) -> Unit) {
 
             func(this@waitForMeasure, this@waitForMeasure.width, this@waitForMeasure.height)
 
+            observer.removeOnPreDrawListener(this)
+
             return true
         }
     }
