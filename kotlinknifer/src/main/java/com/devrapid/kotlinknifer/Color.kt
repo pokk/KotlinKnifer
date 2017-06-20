@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
+import android.view.View
 
 /**
  *
@@ -50,3 +51,13 @@ inline fun Context.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int {
  */
 @ColorInt
 inline fun Context.getResColor(@ColorRes resColor: Int): Int = ContextCompat.getColor(this, resColor)
+
+/**
+ * Get the [Color] from resource id.
+ *
+ * @param resColor opaque RGB integer resColor for ex: -11517920
+ *
+ * @return transparent RGB integer resColor
+ */
+@ColorInt
+inline fun View.getResColor(@ColorRes resColor: Int): Int = ContextCompat.getColor(this.context, resColor)
