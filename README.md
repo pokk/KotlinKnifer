@@ -22,7 +22,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-compile 'com.devrapid.jieyi:kotlinknifer:1.0.9'
+compile 'com.devrapid.jieyi:kotlinknifer:1.0.10'
 ```
 
 Then you can use it!!!
@@ -33,7 +33,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.0.9</version>
+  <version>1.0.10</version>
   <type>pom</type>
 </dependency>
 ```
