@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
+import android.view.View
 
 /**
  *
@@ -26,6 +27,10 @@ import android.support.v4.content.ContextCompat
 inline fun Context.getResColorWithAlpha(@ColorRes resColor: Int, ratio: Float): Int =
     this.getColorWithAlpha(this.getResColor(resColor), ratio)
 
+@ColorInt
+inline fun View.getResColorWithAlpha(@ColorRes resColor: Int, ratio: Float): Int =
+    this.context.getResColorWithAlpha(resColor, ratio)
+
 /**
  * Add the alpha into the Color.
  *
@@ -41,6 +46,10 @@ inline fun Context.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int {
     return Color.argb(a, Color.red(color), Color.green(color), Color.blue(color))
 }
 
+@ColorInt
+inline fun View.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int =
+    this.context.getColorWithAlpha(color, ratio)
+
 /**
  * Get the [Color] from resource id.
  *
@@ -50,3 +59,6 @@ inline fun Context.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int {
  */
 @ColorInt
 inline fun Context.getResColor(@ColorRes resColor: Int): Int = ContextCompat.getColor(this, resColor)
+
+@ColorInt
+inline fun View.getResColor(@ColorRes resColor: Int): Int = this.context.getResColor(resColor)
