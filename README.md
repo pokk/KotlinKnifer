@@ -4,6 +4,13 @@ The library has util tools as below:
 
 1. Log
 2. Fragment
+3. Delegate
+4. Color
+5. Listener
+6. Observable of RxJava
+7. Observer of RxJava
+8. View
+9. Time
 
 # Download
 
@@ -22,7 +29,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-compile 'com.devrapid.jieyi:kotlinknifer:1.0.10'
+compile 'com.devrapid.jieyi:kotlinknifer:1.0.13'
 ```
 
 Then you can use it!!!
@@ -33,10 +40,16 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.0.10</version>
+  <version>1.0.13</version>
   <type>pom</type>
 </dependency>
 ```
+
+# Also Included Library
+
+1. Gson 2.8.1
+2. RxJava 2.1.3
+3. RxKotlin 2.1.0
 
 # Feature
 
