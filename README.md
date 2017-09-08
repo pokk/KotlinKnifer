@@ -1,5 +1,11 @@
 # KotlinKnifer
 
+[![GitHub release](https://img.shields.io/github/release/pokk/KotlinKnifer.svg?style=flat-square)](https://github.com/pokk/KotlinKnifer)
+[![license](https://img.shields.io/github/license/pokk/KotlinKnifer.svg?style=flat-square)](https://github.com/pokk/KotlinKnifer)
+![Gson](https://img.shields.io/badge/Gson-2.8.1-green.svg)
+![RxJava](https://img.shields.io/badge/RxJava-2.1.3-green.svg)
+![RxKotlin](https://img.shields.io/badge/RxKotlin-2.1.0-green.svg)
+
 The library has util tools as below:
 
 1. Log
