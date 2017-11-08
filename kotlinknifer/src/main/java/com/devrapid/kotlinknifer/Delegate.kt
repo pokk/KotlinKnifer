@@ -13,10 +13,7 @@ import kotlin.reflect.KProperty
  * @author  jieyi
  * @since   6/12/17
  */
-
-/**
- * Delegate [WeakReference] for the variables.
- */
+/** Delegate [WeakReference] for the variables. */
 class WeakRef<T>(default: T? = null): ReadWriteProperty<Any?, T?> {
     var variable: WeakReference<T>?
 
@@ -31,9 +28,7 @@ class WeakRef<T>(default: T? = null): ReadWriteProperty<Any?, T?> {
     }
 }
 
-/**
- * Delegate the shared preferences variable.
- */
+/** Delegate the shared preferences variable. */
 class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var onChange: (() -> Unit)? = null):
     ReadWriteProperty<Any, T> {
     companion object {

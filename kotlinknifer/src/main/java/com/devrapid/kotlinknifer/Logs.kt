@@ -8,7 +8,6 @@ import android.util.Log
  * @author Jieyi
  * @since 8/1/15
  */
-
 fun logv(vararg msg: Any?): Unit = Logs.v(*msg)
 
 fun logd(vararg msg: Any?): Unit = Logs.d(*msg)

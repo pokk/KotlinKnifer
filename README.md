@@ -17,6 +17,10 @@ The library has util tools as below:
 7. Observer of RxJava
 8. View
 9. Time
+10. ArrayList
+11. Keyboard
+12. String
+13. Thread
 
 # Download
 
@@ -35,7 +39,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-compile 'com.devrapid.jieyi:kotlinknifer:1.0.13'
+compile 'com.devrapid.jieyi:kotlinknifer:1.0.14'
 ```
 
 Then you can use it!!!
@@ -53,8 +57,8 @@ Then you can use it!!!
 
 # Also Included Library
 
-1. Gson 2.8.1
-2. RxJava 2.1.3
+1. Gson 2.8.2
+2. RxJava 2.1.6
 3. RxKotlin 2.1.0
 
 # Feature

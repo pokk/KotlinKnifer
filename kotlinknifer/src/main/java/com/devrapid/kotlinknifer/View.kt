@@ -15,7 +15,6 @@ import com.example.kotlinknifer.R
  * @author  jieyi
  * @since   4/12/17
  */
-
 inline fun View.resizeView(width: Int? = null, height: Int? = null) = this.layoutParams?.apply {
     height?.let {
         this.height = it
