@@ -21,6 +21,7 @@ The library has util tools as below:
 11. Keyboard
 12. String
 13. Thread
+14. RecyclerView.ItemDecorator
 
 # Download
 
@@ -39,7 +40,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.0.16'
+implementation 'com.devrapid.jieyi:kotlinknifer:1.0.17'
 ```
 
 Then you can use it!!!
@@ -50,7 +51,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.0.16</version>
+  <version>1.0.17</version>
   <type>pom</type>
 </dependency>
 ```
@@ -64,7 +65,7 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```
-implementation('com.devrapid.jieyi:kotlinknifer:1.0.16', {
+implementation('com.devrapid.jieyi:kotlinknifer:1.0.17', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
   exclude group: 'com.google.code.gson', module: 'gson'
