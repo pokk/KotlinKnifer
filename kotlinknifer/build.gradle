@@ -29,6 +29,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.1.6"
     implementation "com.android.support:appcompat-v7:26.1.0"
     implementation "com.android.support:recyclerview-v7:26.1.0"
+    implementation "com.android.support:palette-v7:26.1.0"
 }
 
 apply from: 'https://raw.githubusercontent.com/pokk/JCenterUploader/master/Uploader.gradle'
