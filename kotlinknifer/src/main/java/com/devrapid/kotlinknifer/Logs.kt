@@ -8,15 +8,15 @@ import android.util.Log
  * @author Jieyi
  * @since 8/1/15
  */
-fun logv(vararg msg: Any?): Unit = Logs.v(*msg)
+fun logv(vararg msg: Any?) = Logs.v(*msg)
 
-fun logd(vararg msg: Any?): Unit = Logs.d(*msg)
+fun logd(vararg msg: Any?) = Logs.d(*msg)
 
-fun logi(vararg msg: Any?): Unit = Logs.i(*msg)
+fun logi(vararg msg: Any?) = Logs.i(*msg)
 
-fun logw(vararg msg: Any?): Unit = Logs.w(*msg)
+fun logw(vararg msg: Any?) = Logs.w(*msg)
 
-fun loge(vararg msg: Any?): Unit = Logs.e(*msg)
+fun loge(vararg msg: Any?) = Logs.e(*msg)
 
 internal object Logs {
     var _IS_DEBUG: Boolean = java.lang.Boolean.TRUE  // Debug mode's switch, default is turn off.
@@ -35,28 +35,28 @@ internal object Logs {
      *
      * @param msg output message
      */
-    internal fun v(vararg msg: Any?) = this.showLog(*msg)
+    internal fun v(vararg msg: Any?) = showLog(*msg)
 
     /**
      * DEBUG log.
      *
      * @param msg output message
      */
-    internal fun d(vararg msg: Any?) = this.showLog(*msg)
+    internal fun d(vararg msg: Any?) = showLog(*msg)
 
     /**
      * INFORMATION log.
      *
      * @param msg output message
      */
-    internal fun i(vararg msg: Any?) = this.showLog(*msg)
+    internal fun i(vararg msg: Any?) = showLog(*msg)
 
     /**
      * WARNING log.
      *
      * @param msg output message
      */
-    internal fun w(vararg msg: Any?) = this.showLog(*msg)
+    internal fun w(vararg msg: Any?) = showLog(*msg)
 
     /**
      * ERROR log.
@@ -67,7 +67,7 @@ internal object Logs {
         if (1 == msg.size && msg[0] is Exception)
             LogWrapper().debugCheck(Log::class.java, getExceptionMsg(msg[0] as Exception))
         else
-            this.showLog(*msg)
+            showLog(*msg)
     }
 
     /**
@@ -93,7 +93,7 @@ internal object Logs {
 
                 // Avoid the race condition.
                 synchronized(lockLog) {
-                    return this.logMsg(cls, methodName, msg)
+                    return logMsg(cls, methodName, msg)
                 }
             }
             return true
@@ -133,7 +133,7 @@ internal object Logs {
     }
 
     private fun newCombinedString(block: StringBuilder.() -> Unit): String =
-            this.strBuilder.apply { setLength(0) }.apply(block).toString()
+        strBuilder.apply { setLength(0) }.apply(block).toString()
 
     /**
      * Combine arguments to a string.
@@ -141,8 +141,8 @@ internal object Logs {
      * @param values multiple arguments.
      * @return output string message
      */
-    private fun combineInputArguments(vararg values: Any?): String = this.newCombinedString {
-        values.filter { null != it }.forEach { this.append(it.toString()).append(com.devrapid.kotlinknifer.Logs.SPACE_STRING) }
+    private fun combineInputArguments(vararg values: Any?): String = newCombinedString {
+        values.filter { null != it }.forEach { append(it.toString()).append(com.devrapid.kotlinknifer.Logs.SPACE_STRING) }
     }
 
     /**
@@ -159,8 +159,8 @@ internal object Logs {
      * @param msg exception msg.
      * @return meta information + exception msg.
      */
-    private fun getExceptionMsg(msg: Exception): String = this.newCombinedString {
-        msg.stackTrace.forEach { this.append(it).append("\n") }
+    private fun getExceptionMsg(msg: Exception): String = newCombinedString {
+        msg.stackTrace.forEach { append(it).append("\n") }
     }
 
     /**
@@ -175,7 +175,7 @@ internal object Logs {
         val stackIndex = if (isNullString) tempIndex + 1 else tempIndex
         val ste = Throwable().stackTrace
 
-        return this.newCombinedString {
+        return newCombinedString {
             append(ste[stackIndex].methodName)
             append(com.devrapid.kotlinknifer.Logs.LEFT_PARENTHESIS)
             append(ste[stackIndex].fileName)
