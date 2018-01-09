@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty
  * @since   6/12/17
  */
 /** Delegate [WeakReference] for the variables. */
-class WeakRef<T>(default: T? = null): ReadWriteProperty<Any?, T?> {
+class WeakRef<T>(default: T? = null) : ReadWriteProperty<Any?, T?> {
     var variable: WeakReference<T>?
 
     init {
@@ -29,7 +29,7 @@ class WeakRef<T>(default: T? = null): ReadWriteProperty<Any?, T?> {
 }
 
 /** Delegate the shared preferences variable. */
-class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var onChange: (() -> Unit)? = null):
+class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var onChange: (() -> Unit)? = null) :
     ReadWriteProperty<Any, T> {
     companion object {
         var prefs: SharedPreferences by Delegates.notNull()
@@ -54,8 +54,8 @@ class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var 
             is Set<*> -> prefs.getStringSet(name, defaultValue as Set<String>) as T
         // Using json format to deserialize a string to an object.
             else -> this.gson.fromJson(prefs.getString(name, null) ?:
-                throw KotlinNullPointerException("There is no kind of $name was stored in the shared preferences."),
-                objectType)
+                                       throw KotlinNullPointerException("There is no kind of $name was stored in the shared preferences."),
+                                       objectType)
         }
     }
 

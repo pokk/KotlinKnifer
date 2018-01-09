@@ -11,7 +11,6 @@ import android.view.View
  * @author  jieyi
  * @since   2/15/17
  */
-
 /**
  * Adds a [Fragment] to this manager's layout.
  *

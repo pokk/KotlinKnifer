@@ -14,7 +14,6 @@ import android.view.View
  * @author  jieyi
  * @since   5/30/17
  */
-
 /**
  * Add the alpha into the [Color] from resource id.
  *

@@ -10,7 +10,7 @@ import android.view.View
  * @author  jieyi
  * @since   11/11/17
  */
-class GridSpacingItemDecorator(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean):
+class GridSpacingItemDecorator(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) :
     RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         // item position.

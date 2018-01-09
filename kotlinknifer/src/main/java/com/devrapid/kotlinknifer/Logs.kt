@@ -21,7 +21,6 @@ fun loge(vararg msg: Any?) = Logs.e(*msg)
 internal object Logs {
     var _IS_DEBUG: Boolean = java.lang.Boolean.TRUE  // Debug mode's switch, default is turn off.
     var TAG: String = "MY_LOG"  // TAG
-
     private const val COLON: String = ":"
     private const val LEFT_PARENTHESIS: String = "("
     private const val RIGHT_PARENTHESIS: String = ")"
@@ -86,11 +85,9 @@ internal object Logs {
             if (_IS_DEBUG) {
                 // Because the level of the function depth, the index is 4. 
                 var methodName = Thread.currentThread().stackTrace[METHOD_INDEX].methodName.substringBefore("$")
-
                 // Only exception msg only is 3.
                 if (1 < methodName.length)
                     methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 1].methodName.substringBefore("$")
-
                 // Avoid the race condition.
                 synchronized(lockLog) {
                     return logMsg(cls, methodName, msg)

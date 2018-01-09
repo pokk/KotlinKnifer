@@ -19,7 +19,7 @@ fun animatorListener(init: AnimatorListenerWrapper.() -> Unit): Animator.Animato
  * Using chain style for [animatorListener].
  */
 typealias animatorWithSelf = AnimatorListener.(animator: Animator) -> Unit
-class AnimatorListener: Animator.AnimatorListener {
+class AnimatorListener : Animator.AnimatorListener {
     private var startFunction: animatorWithSelf = {}
     private var endFunction: animatorWithSelf = {}
     private var cancelFunction: animatorWithSelf = {}
@@ -64,7 +64,7 @@ class AnimatorListenerWrapper {
 }
 
 private fun onListener(wrapper: AnimatorListenerWrapper): Animator.AnimatorListener {
-    return object: Animator.AnimatorListener {
+    return object : Animator.AnimatorListener {
         override fun onAnimationStart(animator: Animator) = wrapper._start(animator)
         override fun onAnimationEnd(animator: Animator) = wrapper._end(animator)
         override fun onAnimationCancel(animator: Animator) = wrapper._cancel(animator)

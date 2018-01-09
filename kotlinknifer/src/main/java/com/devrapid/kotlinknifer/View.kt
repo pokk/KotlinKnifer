@@ -40,8 +40,7 @@ fun View.waitForMeasure(func: (v: View, w: Int, h: Int) -> Unit) {
 
         return
     }
-
-    val listener = object: ViewTreeObserver.OnPreDrawListener {
+    val listener = object : ViewTreeObserver.OnPreDrawListener {
         override fun onPreDraw(): Boolean {
             val observer = this@waitForMeasure.viewTreeObserver
             if (observer.isAlive) {

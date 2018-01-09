@@ -22,7 +22,7 @@ fun <T> observer(onError: (Throwable) -> Unit = {},
         onError(onError)
     }
 
-class ObserverPlugin<T>: Observer<T> {
+class ObserverPlugin<T> : Observer<T> {
     private var _onSubscribe: ((Disposable) -> Unit)? = null
     private var _onNext: ((T) -> Unit)? = null
     private var _onComplete: (() -> Unit)? = null
