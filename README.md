@@ -8,24 +8,24 @@
 
 The library has util tools as below:
 
-1. ArrayList
-2. Bitmap
-3. Color
-4. Delegate
-5. Drawable
-6. Fragment
-7. Glide
-8. Keyboard
-9. Listener
-10. Log
-11. Observable of RxJava
-12. Observer of RxJava
-13. RecyclerView.ItemDecorator
-14. RxMvvm
-15. String
-16. Thread
-17. Time
-18. View
+1. [ArrayList](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/ArrayList.kt)
+2. [Bitmap](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Bitmap.kt)
+3. [Color](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Color.kt)
+4. [Delegate](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Delegate.kt)
+5. [Drawable](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Drawable.kt)
+6. [Fragment](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Fragment.kt)
+7. [Glide](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Glide.kt)
+8. [Keyboard](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Keyboard.kt)
+9. [Listener](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Listener.kt)
+10. [Log](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Logs.kt)
+11. [Observable of RxJava](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Observable.kt)
+12. [Observer of RxJava](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Observer.kt)
+14. [RecyclerView.ItemDecorator](https://github.com/pokk/KotlinKnifer/tree/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/recyclerview/itemdecorator)
+15. [RxMvvm](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/mvvm/RxOperation.kt)
+16. [String](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/String.kt)
+17. [Thread](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Thread.kt)
+18. [Time](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Time.kt)
+19. [View](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/View.kt)
 
 # Download
 
@@ -69,7 +69,7 @@ Then you can use it!!!
 
 If you'd not like to use them to your project, you can add the exclude as like below
 
-```
+```gradle
 implementation('com.devrapid.jieyi:kotlinknifer:1.1.2', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
