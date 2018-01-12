@@ -1,12 +1,13 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.devrapid.kotlinknifer
+package com.devrapid.kotlinknifer.support.v4
 
 import android.annotation.SuppressLint
-import android.app.Fragment
-import android.app.FragmentManager
-import android.os.Build
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.View
+import com.devrapid.kotlinknifer.Logs
+import com.devrapid.kotlinknifer.safePop
 import java.util.Stack
 
 /**
@@ -62,44 +63,29 @@ inline fun FragmentManager.popAllFragment(fragmentStack: Stack<Fragment>? = null
  * @param fragment Specific assigned [Fragment].
  */
 inline fun FragmentManager.removeFragment(fragment: Fragment, fragmentStack: Stack<Fragment>? = null) {
-    val transaction = beginTransaction().apply {
+    beginTransaction().apply {
         fragmentStack?.remove(fragment)
-    }.remove(fragment)
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-        transaction.commitNow()
-    else
-        transaction.commit()
+    }.remove(fragment).commitNow()
 }
 
 /**
  * Remove all [Fragment] from [FragmentManager] stack.
  */
 @SuppressLint("RestrictedApi")
-fun FragmentManager.removeRecursiveFragment(fragmentStack: Stack<Fragment>? = null) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        fragments?.forEach {
-            it?.let { f ->
-                it.childFragmentManager?.fragments?.forEach {
-                    it?.let { f.childFragmentManager.removeFragment(it, fragmentStack) }
-                }
-            }
+fun FragmentManager.removeRecursiveFragment(fragmentStack: Stack<Fragment>? = null) = fragments?.forEach {
+    it?.let { f ->
+        it.childFragmentManager?.fragments?.forEach {
+            it?.let { f.childFragmentManager.removeFragment(it, fragmentStack) }
         }
     }
-    else {
-        TODO("VERSION.SDK_INT < O")
-    }
+}
 
 /**
  * Testing code. For showing all fragments and children fragments.
  */
 @SuppressLint("RestrictedApi")
-fun FragmentManager.showAllFragment() =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        fragments?.forEach {
-            it?.let { it.childFragmentManager?.fragments?.forEach { Logs.d("child!!!! : $it") } }
-        }
+fun FragmentManager.showAllFragment() = fragments?.forEach {
+    it?.let {
+        it.childFragmentManager?.fragments?.forEach { Logs.d("child!!!! : $it") }
     }
-    else {
-        TODO("VERSION.SDK_INT < O")
-    }
+}
