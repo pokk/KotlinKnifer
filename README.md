@@ -8,22 +8,24 @@
 
 The library has util tools as below:
 
-1. Log
-2. Fragment
-3. Delegate
-4. Color
-5. Listener
-6. Observable of RxJava
-7. Observer of RxJava
-8. View
-9. Time
-10. ArrayList
-11. Keyboard
-12. String
-13. Thread
-14. RecyclerView.ItemDecorator
-15. Glide
-16. RxMvvm
+1. ArrayList
+2. Bitmap
+3. Color
+4. Delegate
+5. Drawable
+6. Fragment
+7. Glide
+8. Keyboard
+9. Listener
+10. Log
+11. Observable of RxJava
+12. Observer of RxJava
+13. RecyclerView.ItemDecorator
+14. RxMvvm
+15. String
+16. Thread
+17. Time
+18. View
 
 # Download
 
@@ -42,7 +44,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.1.1'
+implementation 'com.devrapid.jieyi:kotlinknifer:1.1.2'
 ```
 
 Then you can use it!!!
@@ -53,7 +55,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -68,7 +70,7 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```
-implementation('com.devrapid.jieyi:kotlinknifer:1.1.1', {
+implementation('com.devrapid.jieyi:kotlinknifer:1.1.2', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
   exclude group: 'com.google.code.gson', module: 'gson'
