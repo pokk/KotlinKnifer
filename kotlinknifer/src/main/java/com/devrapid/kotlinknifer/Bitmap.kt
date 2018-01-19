@@ -41,3 +41,12 @@ inline fun Drawable.toBitmap(): Bitmap {
         }
     }
 }
+
+fun Bitmap.resizeImageAsRatio(aspectRatio: Double): Bitmap = also {
+    val ratio: Double = it.width.toDouble() / it.height.toDouble()
+
+    if (ratio > aspectRatio)
+        it.width = (aspectRatio * it.height).toInt()
+    else
+        it.height = (it.width / aspectRatio).toInt()
+}
