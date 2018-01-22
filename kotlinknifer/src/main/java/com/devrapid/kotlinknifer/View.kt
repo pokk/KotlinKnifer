@@ -5,12 +5,15 @@ package com.devrapid.kotlinknifer
 import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
+import android.support.annotation.ColorRes
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewTreeObserver
+import android.view.WindowManager
 import com.example.kotlinknifer.R
 
 /**
@@ -89,3 +92,15 @@ inline fun Context.statusBarHeight() =
 inline fun Activity.statusBarHeight() = Rect()
     .apply { window.decorView.getWindowVisibleDisplayFrame(this) }
     .top
+
+inline fun Activity.changeStatusBarColor(@ColorRes colorRes: Int) {
+    if (Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT)
+        window.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            statusBarColor = getResColor(colorRes)
+        }
+    else {
+        TODO("Don't support the sdk version is less than 21 yet.")
+    }
+}
