@@ -49,6 +49,13 @@ inline fun Context.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int {
 inline fun View.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int =
     this.context.getColorWithAlpha(color, ratio)
 
+@ColorInt
+inline fun Context.getColorInt(@ColorInt color: Int) =
+    Color.rgb(Color.red(color), Color.green(color), Color.blue(color))
+
+@ColorInt
+inline fun View.getColorInt(@ColorInt color: Int) = context.getColorInt(color)
+
 /**
  * Get the [Color] from resource id.
  *

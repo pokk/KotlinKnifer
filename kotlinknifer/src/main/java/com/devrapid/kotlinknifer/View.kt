@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.os.Build
+import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v7.app.AlertDialog
 import android.view.View
@@ -13,6 +14,7 @@ import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewTreeObserver
+import android.view.Window
 import android.view.WindowManager
 import com.example.kotlinknifer.R
 
@@ -79,7 +81,7 @@ fun Context.alert(message: Int, title: Int? = null, init: (AlertDialog.Builder.(
         init?.let { init() }
     }
 
-inline fun Context.nagivationBarHeiht() =
+inline fun Context.navigationBarHeiht() =
     resources.getIdentifier("navigation_bar_height", "dimen", "android")
         .takeIf { 0 < it }
         ?.let { resources.getDimensionPixelSize(it) } ?: 0
@@ -93,12 +95,18 @@ inline fun Activity.statusBarHeight() = Rect()
     .apply { window.decorView.getWindowVisibleDisplayFrame(this) }
     .top
 
-inline fun Activity.changeStatusBarColor(@ColorRes colorRes: Int) {
+fun Activity.changeStatusBarColorRes(@ColorRes colorRes: Int) =
+    setStatusBarColorBy { statusBarColor = getResColor(colorRes) }
+
+fun Activity.changeStatusBarColor(@ColorInt color: Int, ratio: Float = 1f) =
+    setStatusBarColorBy { statusBarColor = getColorWithAlpha(color, ratio) }
+
+internal inline fun Activity.setStatusBarColorBy(block: Window.() -> Unit) {
     if (Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT)
         window.apply {
             clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            statusBarColor = getResColor(colorRes)
+            block()
         }
     else {
         TODO("Don't support the sdk version is less than 21 yet.")
