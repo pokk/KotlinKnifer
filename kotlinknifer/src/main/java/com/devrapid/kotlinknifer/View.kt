@@ -2,7 +2,9 @@
 
 package com.devrapid.kotlinknifer
 
+import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.View.GONE
@@ -73,3 +75,17 @@ fun Context.alert(message: Int, title: Int? = null, init: (AlertDialog.Builder.(
         setMessage(message)
         init?.let { init() }
     }
+
+inline fun Context.nagivationBarHeiht() =
+    resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        .takeIf { 0 < it }
+        ?.let { resources.getDimensionPixelSize(it) } ?: 0
+
+inline fun Context.statusBarHeight() =
+    resources.getIdentifier("status_bar_height", "dimen", "android")
+        .takeIf { 0 < it }
+        ?.let { resources.getDimensionPixelSize(it) } ?: 0
+
+inline fun Activity.statusBarHeight() = Rect()
+    .apply { window.decorView.getWindowVisibleDisplayFrame(this) }
+    .top
