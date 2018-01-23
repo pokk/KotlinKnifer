@@ -44,7 +44,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.1.7'
+implementation 'com.devrapid.jieyi:kotlinknifer:1.2.0'
 ```
 
 Then you can use it!!!
@@ -55,7 +55,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.1.7</version>
+  <version>1.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -63,14 +63,14 @@ Then you can use it!!!
 # Also Included Library
 
 1. Gson 2.8.2
-2. RxJava 2.1.6
-3. RxKotlin 2.1.0
+2. RxJava 2.1.8
+3. RxKotlin 2.2.0
 4. Glide 4.0.0
 
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:1.1.7', {
+implementation('com.devrapid.jieyi:kotlinknifer:1.2.0', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
   exclude group: 'com.google.code.gson', module: 'gson'
