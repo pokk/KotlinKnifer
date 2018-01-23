@@ -16,3 +16,7 @@ inline infix fun (() -> Unit).iff(condition: Any?): Any? {
         else -> condition?.let { this() }
     }
 }
+
+inline fun Any?.isNull() = null == this
+
+inline fun Any?.isNotNull() = null != this
