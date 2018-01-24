@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager
  * @since   11/8/17
  */
 inline fun View.hideSoftKeyboard() = run {
-    clearFocus()
     (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
         .hideSoftInputFromWindow(windowToken, 0)
 }
