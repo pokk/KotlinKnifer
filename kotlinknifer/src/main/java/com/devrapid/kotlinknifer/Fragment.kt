@@ -83,6 +83,7 @@ fun FragmentManager.removeRecursiveFragment(fragmentStack: Stack<Fragment>? = nu
                 it.childFragmentManager?.fragments?.forEach {
                     it?.let { f.childFragmentManager.removeFragment(it, fragmentStack) }
                 }
+                removeFragment(f, fragmentStack)
             }
         }
     }
