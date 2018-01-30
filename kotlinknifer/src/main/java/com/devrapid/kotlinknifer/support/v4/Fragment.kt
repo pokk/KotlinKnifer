@@ -31,7 +31,7 @@ fun FragmentManager.addFragment(containerViewId: Int,
                                 fragment: Fragment,
                                 needBack: Boolean = false,
                                 fragmentStack: Stack<Fragment>? = null,
-                                sharedElements: HashMap<View, String> = hashMapOf()) = transactionNow {
+                                sharedElements: HashMap<View, String> = hashMapOf()) = transaction {
     replace(containerViewId, fragment, fragment::class.java.simpleName)
     sharedElements.forEach { value -> addSharedElement(value.key, value.value) }
     if (needBack) {
@@ -67,7 +67,7 @@ inline fun FragmentManager.popAllFragment(fragmentStack: Stack<Fragment>? = null
  *
  * @param manager support v4 [FragmentManager].
  */
-inline fun Fragment.removeFrom(manager: FragmentManager) = manager.transactionNow { remove(this@removeFrom) }
+inline fun Fragment.removeFrom(manager: FragmentManager) = manager.transaction { remove(this@removeFrom) }
 
 /**
  * Remove all fragments.
@@ -80,7 +80,7 @@ inline fun FragmentManager.removeLastFragment() = fragments.lastOrNull()?.remove
  *
  * @param manager support v4 [FragmentManager].
  */
-inline fun Fragment.appendTo(manager: FragmentManager) = manager.transactionNow {
+inline fun Fragment.appendTo(manager: FragmentManager) = manager.transaction {
     hide(this@appendTo)
     add(this@appendTo, this@appendTo::class.java.simpleName)
 }
@@ -90,7 +90,7 @@ inline fun Fragment.appendTo(manager: FragmentManager) = manager.transactionNow 
  *
  * @param manager support v4 [FragmentManager].
  */
-inline fun Fragment.hideFrom(manager: FragmentManager) = manager.transactionNow { hide(this@hideFrom) }
+inline fun Fragment.hideFrom(manager: FragmentManager) = manager.transaction { hide(this@hideFrom) }
 
 /**
  * Decorator between [beginTransaction] and [commit].
