@@ -2,9 +2,10 @@
 
 package com.devrapid.kotlinknifer
 
-import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.app.Fragment
 import android.app.FragmentManager
+import android.app.FragmentTransaction
 import android.os.Build
 import android.view.View
 import java.util.Stack
@@ -15,10 +16,14 @@ import java.util.Stack
  */
 /**
  * Adds a [Fragment] to this manager's layout.
+ * Using the [replace] method, we couldn't obtain the fragments. There a way to get it is that
+ * obtaining fragment by [findFragmentByTag]. For convenient, I recommend that using a [Stack]
+ * for keeping fragments.
  *
  * @param containerViewId The container view to where add the fragment.
  * @param fragment The fragment to be added.
  * @param needBack Set that it can back to previous fragment.
+ * @param fragmentStack The stack for keeping the fragments.
  * @param sharedElements Shared element objects and ids from layout xml [android:transitionName].
  *
  * @return the identifier of this transaction's back stack entry.
@@ -27,80 +32,81 @@ fun FragmentManager.addFragment(containerViewId: Int,
                                 fragment: Fragment,
                                 needBack: Boolean = false,
                                 fragmentStack: Stack<Fragment>? = null,
-                                sharedElements: HashMap<View, String> = hashMapOf()) = beginTransaction().also {
-    it.replace(containerViewId, fragment, fragment.javaClass.name)
-    sharedElements.forEach { value -> it.addSharedElement(value.key, value.value) }
+                                sharedElements: HashMap<View, String> = hashMapOf()) = transactionNow {
+    replace(containerViewId, fragment, fragment::class.java.simpleName)
+    sharedElements.forEach { value -> addSharedElement(value.key, value.value) }
     if (needBack) {
-        it.addToBackStack(fragment.javaClass.name)
+        addToBackStack(fragment::class.java.simpleName)
         fragmentStack?.push(fragment)
     }
-}.commit()
-
-/**
- * Pop a [Fragment] from the [FragmentManager].
- *
- * @return is success to pop a [Fragment].
- */
-inline fun FragmentManager.popFragment(fragmentStack: Stack<Fragment>? = null) =
-    if (0 < backStackEntryCount) {
-        popBackStackImmediate()
-        fragmentStack?.safePop()
-        true
-    }
-    else
-        false
-
-/**
- * Clear all [Fragment] in the stack.
- */
-inline fun FragmentManager.popAllFragment(fragmentStack: Stack<Fragment>? = null) =
-    (0..backStackEntryCount - 1).forEach { popFragment(fragmentStack) }
-
-/**
- * Remove a specific [Fragment] from [FragmentManager] stack.
- *
- * @param fragment Specific assigned [Fragment].
- */
-inline fun FragmentManager.removeFragment(fragment: Fragment, fragmentStack: Stack<Fragment>? = null) {
-    val transaction = beginTransaction().apply {
-        fragmentStack?.remove(fragment)
-    }.remove(fragment)
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-        transaction.commitNow()
-    else
-        transaction.commit()
 }
 
 /**
- * Remove all [Fragment] from [FragmentManager] stack.
+ * Pop a stack from the back stack.
+ *
+ * @param fragmentStack The stack for keeping the fragments.
+ *
+ * @return is success to pop a stack.
  */
-@SuppressLint("RestrictedApi")
-fun FragmentManager.removeRecursiveFragment(fragmentStack: Stack<Fragment>? = null) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        fragments?.forEach {
-            it?.let { f ->
-                it.childFragmentManager?.fragments?.forEach {
-                    it?.let { f.childFragmentManager.removeFragment(it, fragmentStack) }
-                }
-                removeFragment(f, fragmentStack)
-            }
-        }
-    }
-    else {
-        TODO("VERSION.SDK_INT < O")
-    }
+inline fun FragmentManager.popFragment(fragmentStack: Stack<Fragment>? = null) = run {
+    fragmentStack?.safePop()
+    popBackStackImmediate()
+}
 
 /**
- * Testing code. For showing all fragments and children fragments.
+ * Clear all stacks from the back stack.
+ *
+ * @param fragmentStack The stack for keeping the fragments.
  */
-@SuppressLint("RestrictedApi")
-fun FragmentManager.showAllFragment() =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        fragments?.forEach {
-            it?.let { it.childFragmentManager?.fragments?.forEach { Logs.d("child!!!! : $it") } }
-        }
+inline fun FragmentManager.popAllFragment(fragmentStack: Stack<Fragment>? = null) {
+    while (true) if (!popFragment(fragmentStack)) break
+}
+
+/**
+ * Remove a specific [Fragment] from [FragmentManager]'s fragments.
+ * NOTE: Don't mix this function with [popFragment] or [popAllFragment].
+ *
+ * @param manager [FragmentManager].
+ */
+inline fun Fragment.removeFrom(manager: FragmentManager) = manager.transactionNow { remove(this@removeFrom) }
+
+/**
+ * Remove all fragments.
+ */
+@TargetApi(Build.VERSION_CODES.O)
+inline fun FragmentManager.removeLastFragment() = fragments.lastOrNull()?.removeFrom(this)
+
+/**
+ * Add a [Fragment] and hide the current presenting fragment.
+ * NOTE: Don't mix this function with [popFragment] or [popAllFragment].
+ *
+ * @param manager [FragmentManager].
+ */
+inline fun Fragment.appendTo(manager: FragmentManager) = manager.transactionNow {
+    hide(this@appendTo)
+    add(this@appendTo, this@appendTo::class.java.simpleName)
+}
+
+/**
+ * Hide a assigned [Fragment].
+ *
+ * @param manager [FragmentManager].
+ */
+inline fun Fragment.hideFrom(manager: FragmentManager) = manager.transactionNow { hide(this@hideFrom) }
+
+/**
+ * Decorator between [beginTransaction] and [commit].
+ */
+inline fun FragmentManager.transaction(block: FragmentTransaction.() -> Unit) =
+    beginTransaction().apply(block).commit()
+
+/**
+ * Decorator between [beginTransaction] and [commitNow].
+ */
+inline fun FragmentManager.transactionNow(block: FragmentTransaction.() -> Unit) =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        beginTransaction().apply(block).commitNow()
     }
     else {
-        TODO("VERSION.SDK_INT < O")
+        TODO("VERSION.SDK_INT < N")
     }
