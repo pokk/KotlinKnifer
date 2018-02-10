@@ -2,6 +2,9 @@ package com.devrapid.kotlinknifer
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import java.lang.ref.PhantomReference
+import java.lang.ref.ReferenceQueue
+import java.lang.ref.SoftReference
 import java.lang.ref.WeakReference
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
@@ -13,18 +16,88 @@ import kotlin.reflect.KProperty
  * @author  jieyi
  * @since   6/12/17
  */
-/** Delegate [WeakReference] for the variables. */
-class WeakRef<T>(default: T? = null) : ReadWriteProperty<Any?, T?> {
-    var variable: WeakReference<T>?
+/**
+ * Wrap the [SoftReference] by kotlin delegate. Don't have to use [get]/[set] method
+ * for accessing or assigning a variable each of times.
+ *
+ * ```
+ * val data by SoftRef(TestData())
+ * ```
+ */
+class SoftRef<T>(
+    default: T? = null,
+    private val queue: ReferenceQueue<T>? = null
+                ) : ReadWriteProperty<Any?, T?> {
+    private var variable: SoftReference<T>?
 
     init {
-        this.variable = default?.let { WeakReference(it) }
+        variable = initSoftReference(default, queue)
     }
 
-    override fun getValue(thisRef: Any?, property: KProperty<*>): T? = this.variable?.get()
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T? = variable?.get()
 
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-        this.variable = value?.let { WeakReference(it) }
+        variable = initSoftReference(value, queue)
+    }
+
+    private fun initSoftReference(value: T? = null, queue: ReferenceQueue<T>? = null) =
+        value?.run {
+            queue?.let { SoftReference(this, it) } ?: SoftReference(this)
+        }
+}
+
+/**
+ * Wrap the [WeakReference] by kotlin delegate. Don't have to use [get]/[set] method
+ * for accessing or assigning a variable each of times.
+ *
+ * ```
+ * val data by SoftRef(TestData())
+ * ```
+ */
+class WeakRef<T>(
+    default: T? = null,
+    private val queue: ReferenceQueue<T>? = null
+                ) : ReadWriteProperty<Any?, T?> {
+    private var variable: WeakReference<T>?
+
+    init {
+        variable = initWeakReference(default, queue)
+    }
+
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T? = variable?.get()
+
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
+        variable = initWeakReference(value, queue)
+    }
+
+    private fun initWeakReference(value: T? = null, queue: ReferenceQueue<T>? = null) =
+        value?.run {
+            queue?.let { WeakReference(this, it) } ?: WeakReference(this)
+        }
+}
+
+/**
+ * Wrap the [PhantomReference] by kotlin delegate. Don't have to use [get]/[set] method
+ * for accessing or assigning a variable each of times.
+ *
+ * ```
+ * val data by SoftRef(TestData())
+ * ```
+ */
+class PhantomRef<T>(
+    default: T? = null,
+    private val queue: ReferenceQueue<T>
+                   ) : ReadWriteProperty<Any?, T?> {
+    private var variable: PhantomReference<T>?
+
+    init {
+        variable = default?.let { PhantomReference(it, queue) }
+    }
+
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T? = variable?.get()
+
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
+        variable = value?.let { PhantomReference(it, queue) }
     }
 }
 
