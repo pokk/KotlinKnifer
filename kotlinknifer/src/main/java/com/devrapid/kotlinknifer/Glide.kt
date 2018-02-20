@@ -13,17 +13,21 @@ fun <T> glideListener(listener: GlideRequestListenerWrapper<T>.() -> Unit): Requ
     val wrapper = GlideRequestListenerWrapper<T>().apply(listener)
 
     return object : RequestListener<T> {
-        override fun onLoadFailed(e: GlideException?,
-                                  model: Any?,
-                                  target: Target<T>?,
-                                  isFirstResource: Boolean) =
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<T>?,
+            isFirstResource: Boolean
+        ) =
             wrapper.onLoadFailed?.invoke(e, model, target, isFirstResource) ?: false
 
-        override fun onResourceReady(resource: T,
-                                     model: Any?,
-                                     target: Target<T>?,
-                                     dataSource: DataSource?,
-                                     isFirstResource: Boolean) =
+        override fun onResourceReady(
+            resource: T,
+            model: Any?,
+            target: Target<T>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ) =
             wrapper.onResourceReady?.invoke(resource, model, target, dataSource, isFirstResource) ?: false
     }
 }
@@ -44,11 +48,13 @@ class GlideRequestListenerWrapper<T> {
      *         [false] to allow Glide's request to update the target.
      *         Setting the resource includes handling animations, be sure to take that into account.
      */
-    var onResourceReady: ((resource: T,
-                           model: Any?,
-                           target: Target<T>?,
-                           dataSource: DataSource?,
-                           isFirstResource: Boolean) -> Boolean)? = null
+    var onResourceReady: ((
+        resource: T,
+        model: Any?,
+        target: Target<T>?,
+        dataSource: DataSource?,
+        isFirstResource: Boolean
+    ) -> Boolean)? = null
     /**
      * Called when an exception occurs during a load, immediately before [Target.onLoadFailed].
      * Will only be called if we currently want to display an image for the given model
@@ -79,5 +85,6 @@ class GlideRequestListenerWrapper<T> {
      * @return [true] if the listener has handled updating the target for the given exception,
      *         [false] to allow Glide's request to update the target.
      */
-    var onLoadFailed: ((e: GlideException?, model: Any?, target: Target<T>?, isFirstResource: Boolean) -> Boolean)? = null
+    var onLoadFailed: ((e: GlideException?, model: Any?, target: Target<T>?, isFirstResource: Boolean) -> Boolean)? =
+        null
 }

@@ -15,10 +15,11 @@ fun animatorListener(init: AnimatorListenerWrapper.() -> Unit): Animator.Animato
     return onListener(wrapper)
 }
 
-/**
- * Using chain style for [animatorListener].
- */
+    /**
+     * Using chain style for [animatorListener].
+     */
 typealias animatorWithSelf = AnimatorListener.(animator: Animator) -> Unit
+
 class AnimatorListener : Animator.AnimatorListener {
     private var startFunction: animatorWithSelf = {}
     private var endFunction: animatorWithSelf = {}
@@ -32,14 +33,18 @@ class AnimatorListener : Animator.AnimatorListener {
 
     fun onAnimationStart(onStartFun: animatorWithSelf): AnimatorListener = this.also { it.startFunction = onStartFun }
     fun onAnimationEnd(onEndFun: animatorWithSelf): AnimatorListener = this.also { it.endFunction = onEndFun }
-    fun onAnimationCancel(onCancelFun: animatorWithSelf): AnimatorListener = this.also { it.cancelFunction = onCancelFun }
-    fun onAnimationRepeat(onRepeatFun: animatorWithSelf): AnimatorListener = this.also { it.repeatFunction = onRepeatFun }
+    fun onAnimationCancel(onCancelFun: animatorWithSelf): AnimatorListener =
+        this.also { it.cancelFunction = onCancelFun }
+
+    fun onAnimationRepeat(onRepeatFun: animatorWithSelf): AnimatorListener =
+        this.also { it.repeatFunction = onRepeatFun }
 }
 
-/**
- * Using DSL style for [animatorListener].
- */
+    /**
+     * Using DSL style for [animatorListener].
+     */
 typealias animatorEmpty = (animator: Animator) -> Unit
+
 class AnimatorListenerWrapper {
     internal var _start: (animator: Animator) -> Unit = {}
     internal var _end: (animator: Animator) -> Unit = {}

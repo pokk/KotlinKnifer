@@ -139,7 +139,8 @@ internal object Logs {
      * @return output string message
      */
     private fun combineInputArguments(vararg values: Any?): String = newCombinedString {
-        values.filter { null != it }.forEach { append(it.toString()).append(com.devrapid.kotlinknifer.Logs.SPACE_STRING) }
+        values.filter { null != it }
+            .forEach { append(it.toString()).append(com.devrapid.kotlinknifer.Logs.SPACE_STRING) }
     }
 
     /**

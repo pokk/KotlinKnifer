@@ -28,11 +28,13 @@ import java.util.Stack
  *
  * @return the identifier of this transaction's back stack entry.
  */
-fun FragmentManager.addFragment(containerViewId: Int,
-                                fragment: Fragment,
-                                needBack: Boolean = false,
-                                fragmentStack: Stack<Fragment>? = null,
-                                sharedElements: HashMap<View, String> = hashMapOf()) = transaction {
+fun FragmentManager.addFragment(
+    containerViewId: Int,
+    fragment: Fragment,
+    needBack: Boolean = false,
+    fragmentStack: Stack<Fragment>? = null,
+    sharedElements: HashMap<View, String> = hashMapOf()
+) = transaction {
     replace(containerViewId, fragment, fragment::class.java.simpleName)
     sharedElements.forEach { value -> addSharedElement(value.key, value.value) }
     if (needBack) {

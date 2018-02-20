@@ -11,10 +11,12 @@ import io.reactivex.disposables.Disposable
  */
 fun <T> observer(): ObserverPlugin<T> = ObserverPlugin()
 
-fun <T> observer(onError: (Throwable) -> Unit = {},
-                 onComplete: () -> Unit = {},
-                 onSubscribe: (Disposable) -> Unit = {},
-                 onNext: (T) -> Unit = {}) =
+fun <T> observer(
+    onError: (Throwable) -> Unit = {},
+    onComplete: () -> Unit = {},
+    onSubscribe: (Disposable) -> Unit = {},
+    onNext: (T) -> Unit = {}
+) =
     ObserverPlugin<T>().apply {
         onSubscribe(onSubscribe)
         onNext(onNext)
@@ -33,7 +35,9 @@ class ObserverPlugin<T> : Observer<T> {
     override fun onComplete() = this._onComplete?.invoke() ?: Unit
     override fun onError(e: Throwable) = this._onError?.invoke(e) ?: Unit
 
-    fun onSubscribe(onSubscribeFun: (Disposable) -> Unit): ObserverPlugin<T> = this.apply { _onSubscribe = onSubscribeFun }
+    fun onSubscribe(onSubscribeFun: (Disposable) -> Unit): ObserverPlugin<T> =
+        this.apply { _onSubscribe = onSubscribeFun }
+
     fun onNext(onNextFun: (t: T) -> Unit): ObserverPlugin<T> = this.apply { _onNext = onNextFun }
     fun onComplete(onCompleteFun: () -> Unit): ObserverPlugin<T> = this.apply { _onComplete = onCompleteFun }
     fun onError(onErrorFun: (t: Throwable) -> Unit): ObserverPlugin<T> = this.apply { _onError = onErrorFun }

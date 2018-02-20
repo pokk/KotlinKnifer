@@ -10,8 +10,10 @@ import android.view.View
  * @author  jieyi
  * @since   11/11/17
  */
-class VerticalItemDecorator(private val topBottom: Int,
-                            private val leftRight: Int = topBottom) : RecyclerView.ItemDecoration() {
+class VerticalItemDecorator(
+    private val topBottom: Int,
+    private val leftRight: Int = topBottom
+) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val position: Int = parent.getChildAdapterPosition(view)
         val childrenCount: Int = parent.childCount

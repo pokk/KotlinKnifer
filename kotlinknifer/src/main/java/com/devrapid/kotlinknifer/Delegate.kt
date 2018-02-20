@@ -27,7 +27,7 @@ import kotlin.reflect.KProperty
 class SoftRef<T>(
     default: T? = null,
     private val queue: ReferenceQueue<T>? = null
-                ) : ReadWriteProperty<Any?, T?> {
+) : ReadWriteProperty<Any?, T?> {
     private var variable: SoftReference<T>?
 
     init {
@@ -57,7 +57,7 @@ class SoftRef<T>(
 class WeakRef<T>(
     default: T? = null,
     private val queue: ReferenceQueue<T>? = null
-                ) : ReadWriteProperty<Any?, T?> {
+) : ReadWriteProperty<Any?, T?> {
     private var variable: WeakReference<T>?
 
     init {
@@ -87,7 +87,7 @@ class WeakRef<T>(
 class PhantomRef<T>(
     default: T? = null,
     private val queue: ReferenceQueue<T>
-                   ) : ReadWriteProperty<Any?, T?> {
+) : ReadWriteProperty<Any?, T?> {
     private var variable: PhantomReference<T>?
 
     init {
@@ -126,8 +126,8 @@ class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var 
             is String -> prefs.getString(name, defaultValue as String) as T
             is Set<*> -> prefs.getStringSet(name, defaultValue as Set<String>) as T
         // Using json format to deserialize a string to an object.
-            else -> this.gson.fromJson(prefs.getString(name, null) ?:
-                                       throw KotlinNullPointerException("There is no kind of $name was stored in the shared preferences."),
+            else -> this.gson.fromJson(prefs.getString(name,
+                                                       null) ?: throw KotlinNullPointerException("There is no kind of $name was stored in the shared preferences."),
                                        objectType)
         }
     }
