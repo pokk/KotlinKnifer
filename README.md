@@ -44,7 +44,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.3.1'
+implementation 'com.devrapid.jieyi:kotlinknifer:1.3.2'
 ```
 
 Then you can use it!!!
@@ -55,7 +55,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.3.0</version>
+  <version>1.3.2</version>
   <type>pom</type>
 </dependency>
 ```
