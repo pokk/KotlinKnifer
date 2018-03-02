@@ -34,10 +34,10 @@ fun FragmentManager.addFragment(
     needBack: Boolean = false,
     fragmentStack: Stack<Fragment>? = null,
     sharedElements: HashMap<View, String> = hashMapOf(),
-    block: (FragmentTransaction) -> Unit
+    block: ((FragmentTransaction) -> Unit)? = null
 ) = transaction {
     replace(containerViewId, fragment, fragment::class.java.simpleName)
-    block(this)
+    block?.invoke(this)
     sharedElements.forEach { value -> addSharedElement(value.key, value.value) }
     if (needBack) {
         addToBackStack(fragment::class.java.simpleName)
