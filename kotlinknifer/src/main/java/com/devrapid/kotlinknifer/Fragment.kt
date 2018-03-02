@@ -36,13 +36,13 @@ fun FragmentManager.addFragment(
     sharedElements: HashMap<View, String> = hashMapOf(),
     block: ((FragmentTransaction) -> Unit)? = null
 ) = transaction {
-    replace(containerViewId, fragment, fragment::class.java.simpleName)
     block?.invoke(this)
     sharedElements.forEach { value -> addSharedElement(value.key, value.value) }
     if (needBack) {
         addToBackStack(fragment::class.java.simpleName)
         fragmentStack?.push(fragment)
     }
+    replace(containerViewId, fragment, fragment::class.java.simpleName)
 }
 
 /**
