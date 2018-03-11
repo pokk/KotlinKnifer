@@ -11,3 +11,5 @@ package com.devrapid.kotlinshaver
 inline fun Int.format(digits: Int) = String.format("%0${digits}d", this)
 
 inline fun Int.toTimeString(): String = "${(this / 60).format(2)}:${(this % 60).format(2)}"
+
+val currentTime get() = System.currentTimeMillis()
