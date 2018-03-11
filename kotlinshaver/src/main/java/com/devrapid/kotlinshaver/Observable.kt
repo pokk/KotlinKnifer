@@ -37,11 +37,17 @@ inline fun <T> single(crossinline body: (SingleEmitter<T>) -> Unit): Single<T> =
 
 inline fun <T> single(obj: T): Single<T> = single { it.onSuccess(obj) }
 
+inline fun <T> T.toSingle() = single(this)
+
 inline fun <T> maybe(crossinline body: (MaybeEmitter<T>) -> Unit): Maybe<T> = MaybeCreate { body(it) }
 
 inline fun <T> maybeYes(obj: T): Maybe<T> = maybe { it.onSuccess(obj) }
 
 inline fun <T> maybeNo(): Maybe<T> = maybe { it.onComplete() }
+
+inline fun <T> T.toMaybeY() = maybeYes(this)
+
+inline fun <T> toMaybeN() = maybeNo<T>()
 
 inline fun completable(crossinline body: (CompletableEmitter) -> Unit) = CompletableCreate { body(it) }
 
