@@ -1,10 +1,11 @@
 apply plugin: 'java-library'
+apply plugin: 'kotlin'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compile 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.10'
+    api 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    api 'io.reactivex.rxjava2:rxjava:2.1.10'
 }
 
 sourceCompatibility = "1.8"
@@ -84,7 +85,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-    archives javadocJar
+//    archives javadocJar
     archives sourcesJar
 }
 

@@ -28,7 +28,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation project(':kotlinknifer')
+//    implementation project(':kotlinknifer')
+    implementation "com.devrapid.jieyi:kotlinknifer:1.4.1"
 
     testImplementation 'junit:junit:4.12'
 }
