@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.devrapid.kotlinknifer
+package com.devrapid.kotlinshaver
 
 import java.text.DecimalFormat
 

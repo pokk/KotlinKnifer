@@ -1,0 +1,115 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.10'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+
+// Difference project using difference configuration.
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+// Bintray User Info
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+// Bintray Project Info
+Properties gradleProperties = new Properties()
+gradleProperties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+
+version = gradleProperties.getProperty("proj_kotlin_version")
+group = gradleProperties.getProperty("proj_group")
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                name gradleProperties.getProperty("proj_kotlin_libname")
+                groupId gradleProperties.getProperty("proj_group")
+                artifactId gradleProperties.getProperty("proj_kotlin_artifactid")
+                version gradleProperties.getProperty("proj_kotlin_version")
+                packaging 'aar'
+                url gradleProperties.getProperty("proj_websiteurl")
+                description gradleProperties.getProperty("proj_description")
+                licenses {
+                    license {
+                        name gradleProperties.getProperty("license_name")
+                        url gradleProperties.getProperty("license_url")
+                    }
+                }
+                developers {
+                    developer {
+                        id gradleProperties.getProperty("developer_id")
+                        name gradleProperties.getProperty("developer_name")
+                        email gradleProperties.getProperty("developer_email")
+                    }
+                }
+                scm {
+                    connection gradleProperties.getProperty("proj_vcsurl")
+                    developerConnection gradleProperties.getProperty("proj_vcsurl")
+                    url gradleProperties.getProperty("proj_websiteurl")
+                }
+            }
+        }
+    }
+}
+
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+
+    pkg {
+        repo = gradleProperties.getProperty("proj_repo")
+        name = gradleProperties.getProperty("proj_kotlin_name")
+        desc = gradleProperties.getProperty("proj_description")
+        websiteUrl = gradleProperties.getProperty("proj_websiteurl")
+        issueTrackerUrl = gradleProperties.getProperty("proj_issuetrackerurl")
+        vcsUrl = gradleProperties.getProperty("proj_vcsurl")
+        licenses = ["Apache-2.0"]
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            desc = gradleProperties.getProperty("proj_description")
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+}

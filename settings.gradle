@@ -1,1 +1,1 @@
-include ':sample', ':kotlinknifer'
+include ':sample', ':kotlinknifer', ':kotlinshaver'

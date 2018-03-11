@@ -1,4 +1,4 @@
-package com.devrapid.kotlinknifer
+package com.devrapid.kotlinshaver
 
 /**
  * @author  jieyi
