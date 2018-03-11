@@ -39,7 +39,7 @@ imported into. That's why I should split this into two.
 - `kotlinknifer` is for android library.
 - `kotlinshaver` is for pure kotlin/java library.
 
-After `kotlinknifer` v1.4.1 won't include the pure kotlin/java library. If you'd like to use both,
+After `kotlinknifer` v1.5.0 won't include the pure kotlin/java library. If you'd like to use both,
 please import `kotlinshaver` together.
 
 # Import To Your Project
@@ -59,9 +59,9 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.4.1'
+implementation 'com.devrapid.jieyi:kotlinknifer:1.5.0'
 
-implementation 'com.devrapid.jieyi:kotlinshaver:0.1.5'
+implementation 'com.devrapid.jieyi:kotlinshaver:0.2.0'
 ```
 
 Then you can use it!!!
@@ -72,14 +72,14 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.4.1</version>
+  <version>1.5.0</version>
   <type>pom</type>
 </dependency>
 
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinshaver</artifactId>
-  <version>0.1.5</version>
+  <version>0.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -89,24 +89,24 @@ Then you can use it!!!
 ## kotlinknifer
 
 1. Gson 2.8.2
-2. Glide 4.0.0
+2. Glide 4.6.1
 
 ## kotlinshaver
 
-1. RxJava 2.1.8
+1. RxJava 2.1.10
 2. RxKotlin 2.2.0
 
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:1.4.1', {
+implementation('com.devrapid.jieyi:kotlinknifer:1.5.0', {
   exclude group: 'com.google.code.gson', module: 'gson'
   exclude group: 'com.github.bumptech.glide', module: 'glide'
 })
 ```
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinshaverr:0.1.5', {
+implementation('com.devrapid.jieyi:kotlinshaverr:0.2.0', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
 })
