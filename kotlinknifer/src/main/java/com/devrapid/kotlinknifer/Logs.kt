@@ -158,6 +158,7 @@ internal object Logs {
      * @return meta information + exception msg.
      */
     private fun getExceptionMsg(msg: Exception): String = newCombinedString {
+        Throwable().stackTrace[6].let { append("${it.methodName}(${it.fileName}:${it.lineNumber}): ${msg.message}\n") }
         msg.stackTrace.forEach { append(it).append("\n") }
     }
 
