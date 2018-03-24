@@ -7,9 +7,9 @@ import io.reactivex.disposables.Disposable
  * @author  Jieyi Wu
  * @since   2018/03/25
  */
-fun <T> single(): SinglePlugin<T> = SinglePlugin()
+fun <T> singleObserver(): SinglePlugin<T> = SinglePlugin()
 
-fun <T> single(
+fun <T> singleObserver(
     onError: (Throwable) -> Unit = {},
     onSuccess: (T) -> Unit = {},
     onSubscribe: (Disposable) -> Unit = {}

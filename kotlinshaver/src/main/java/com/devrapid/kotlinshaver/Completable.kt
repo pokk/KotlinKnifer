@@ -7,9 +7,9 @@ import io.reactivex.disposables.Disposable
  * @author  Jieyi Wu
  * @since   2018/03/25
  */
-fun <T> completable(): CompletablePlugin = CompletablePlugin()
+fun completableObserver(): CompletablePlugin = CompletablePlugin()
 
-fun <T> completable(
+fun completableObserver(
     onError: (Throwable) -> Unit = {},
     onComplete: () -> Unit = {},
     onSubscribe: (Disposable) -> Unit = {}
