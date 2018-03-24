@@ -10,6 +10,22 @@ The library has util tools as below:
 
 ### KotlinKnifer
 
+1. Bitmap
+2. Collection
+3. Color
+4. Delegate
+5. Display
+6. Drawable
+7. Fragment
+8. Glide
+9. Keyboard
+10. Listener
+11. Logs
+12. Resolution
+13. Screen
+14. Uri
+15. View
+
 1. [ArrayList](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/ArrayList.kt)
 2. [Bitmap](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Bitmap.kt)
 3. [Color](https://github.com/pokk/KotlinKnifer/blob/010e7457844c341fa62260e835724b4bf0090332/kotlinknifer/src/main/java/com/devrapid/kotlinknifer/Color.kt)
