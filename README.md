@@ -89,7 +89,7 @@ And add our dependency to your app `bundle.gradle`.
 ```gradle
 implementation 'com.devrapid.jieyi:kotlinknifer:1.5.4'
 
-implementation 'com.devrapid.jieyi:kotlinshaver:0.2.1'
+implementation 'com.devrapid.jieyi:kotlinshaver:0.2.2'
 ```
 
 Then you can use it!!!
@@ -107,7 +107,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinshaver</artifactId>
-  <version>0.2.1</version>
+  <version>0.2.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -134,7 +134,7 @@ implementation('com.devrapid.jieyi:kotlinknifer:1.5.4', {
 ```
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinshaverr:0.2.1', {
+implementation('com.devrapid.jieyi:kotlinshaverr:0.2.2', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
 })
