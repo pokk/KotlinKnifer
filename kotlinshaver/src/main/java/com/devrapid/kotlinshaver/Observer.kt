@@ -16,8 +16,7 @@ fun <T> observer(
     onComplete: () -> Unit = {},
     onSubscribe: (Disposable) -> Unit = {},
     onNext: (T) -> Unit = {}
-) =
-    ObserverPlugin<T>().apply {
+) = ObserverPlugin<T>().apply {
         onSubscribe(onSubscribe)
         onNext(onNext)
         onComplete(onComplete)
