@@ -87,7 +87,7 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.5.6'
+implementation 'com.devrapid.jieyi:kotlinknifer:1.5.7'
 
 implementation 'com.devrapid.jieyi:kotlinshaver:0.2.2'
 ```
@@ -100,7 +100,7 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.5.6</version>
+  <version>1.5.7</version>
   <type>pom</type>
 </dependency>
 
@@ -127,7 +127,7 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:1.5.6', {
+implementation('com.devrapid.jieyi:kotlinknifer:1.5.7', {
   exclude group: 'com.google.code.gson', module: 'gson'
   exclude group: 'com.github.bumptech.glide', module: 'glide'
 })
