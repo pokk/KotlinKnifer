@@ -13,6 +13,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.WindowManager
@@ -22,9 +23,12 @@ import com.example.kotlinknifer.R
  * @author  jieyi
  * @since   4/12/17
  */
-inline fun View.resizeView(width: Int? = null, height: Int? = null) = layoutParams?.apply {
-    height?.let { this.height = it }
-    width?.let { this.width = it }
+inline fun View.resizeView(width: Int? = null, height: Int? = null) {
+    val newLayoutParams = layoutParams?.apply {
+        height?.let { this.height = it }
+        width?.let { this.width = it }
+    }
+    layoutParams = newLayoutParams
 }
 
 inline fun View.visiable() {
