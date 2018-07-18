@@ -2,12 +2,10 @@
 
 package com.devrapid.kotlinknifer
 
-import android.annotation.TargetApi
-import android.app.Fragment
-import android.app.FragmentManager
-import android.app.FragmentTransaction
-import android.os.Build
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import java.util.Stack
 
 /**
@@ -70,21 +68,20 @@ inline fun FragmentManager.popAllFragment(fragmentStack: Stack<Fragment>? = null
  * Remove a specific [Fragment] from [FragmentManager]'s fragments.
  * NOTE: Don't mix this function with [popFragment] or [popAllFragment].
  *
- * @param manager [FragmentManager].
+ * @param manager support v4 [FragmentManager].
  */
 inline fun Fragment.removeFrom(manager: FragmentManager) = manager.transaction { remove(this@removeFrom) }
 
 /**
  * Remove all fragments.
  */
-@TargetApi(Build.VERSION_CODES.O)
 inline fun FragmentManager.removeLastFragment() = fragments.lastOrNull()?.removeFrom(this)
 
 /**
  * Add a [Fragment] and hide the current presenting fragment.
  * NOTE: Don't mix this function with [popFragment] or [popAllFragment].
  *
- * @param manager [FragmentManager].
+ * @param manager support v4 [FragmentManager].
  */
 inline fun Fragment.appendTo(manager: FragmentManager) = manager.transaction {
     hide(this@appendTo)
@@ -94,7 +91,7 @@ inline fun Fragment.appendTo(manager: FragmentManager) = manager.transaction {
 /**
  * Hide a assigned [Fragment].
  *
- * @param manager [FragmentManager].
+ * @param manager support v4 [FragmentManager].
  */
 inline fun Fragment.hideFrom(manager: FragmentManager) = manager.transaction { hide(this@hideFrom) }
 
@@ -108,9 +105,4 @@ inline fun FragmentManager.transaction(block: FragmentTransaction.() -> Unit) =
  * Decorator between [beginTransaction] and [commitNow].
  */
 inline fun FragmentManager.transactionNow(block: FragmentTransaction.() -> Unit) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        beginTransaction().apply(block).commitNow()
-    }
-    else {
-        TODO("VERSION.SDK_INT < N")
-    }
+    beginTransaction().apply(block).commitNow()

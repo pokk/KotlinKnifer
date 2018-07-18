@@ -133,6 +133,15 @@ implementation('com.devrapid.jieyi:kotlinknifer:1.5.7', {
 })
 ```
 
+### For Androidx
+
+```gradle
+implementation('com.devrapid.jieyi:kotlinknifer:2.0.0', {
+  exclude group: 'com.google.code.gson', module: 'gson'
+  exclude group: 'com.github.bumptech.glide', module: 'glide'
+})
+```
+
 ```gradle
 implementation('com.devrapid.jieyi:kotlinshaverr:0.2.2', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
