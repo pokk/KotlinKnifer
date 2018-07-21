@@ -55,6 +55,7 @@ The library has util tools as below:
 6. String
 7. Thread
 8. Time
+9. Casting
 
 # NOTE
 
@@ -87,9 +88,9 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:1.5.7'
+implementation 'com.devrapid.jieyi:kotlinknifer:2.0.1'
 
-implementation 'com.devrapid.jieyi:kotlinshaver:0.2.2'
+implementation 'com.devrapid.jieyi:kotlinshaver:1.0.1'
 ```
 
 Then you can use it!!!
@@ -100,14 +101,14 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>1.5.7</version>
+  <version>2.0.1</version>
   <type>pom</type>
 </dependency>
 
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinshaver</artifactId>
-  <version>0.2.2</version>
+  <version>1.0.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -120,6 +121,7 @@ Then you can use it!!!
 2. Glide 4.6.1
 
 ## kotlinshaver
+### For Androidx
 
 1. RxJava 2.1.10
 2. RxKotlin 2.2.0
@@ -127,16 +129,7 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:1.5.7', {
-  exclude group: 'com.google.code.gson', module: 'gson'
-  exclude group: 'com.github.bumptech.glide', module: 'glide'
-})
-```
-
-### For Androidx
-
-```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:2.0.0', {
+implementation('com.devrapid.jieyi:kotlinknifer:2.0.1', {
   exclude group: 'com.google.code.gson', module: 'gson'
   exclude group: 'com.github.bumptech.glide', module: 'glide'
 })
@@ -159,7 +152,7 @@ Please let me know, thank you!
 # License
 
 ```
-Copyright (C) 2017 Jieyi Wu
+Copyright (C) 2018 Jieyi Wu
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
