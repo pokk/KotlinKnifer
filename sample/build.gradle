@@ -21,8 +21,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha1'
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation project(':kotlinknifer')
 //    implementation "com.devrapid.jieyi:kotlinknifer:1.4.1"
