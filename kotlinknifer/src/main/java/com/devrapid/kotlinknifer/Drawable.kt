@@ -42,7 +42,7 @@ fun Context.scaledDrawable(@DrawableRes drawableId: Int, ratio: Float) =
 
 inline fun Int.toDrawable(context: Context) = context.getDrawable(this)
 
-inline fun Bitmap.toDrawable(context: Context) = BitmapDrawable(context.resources, this).bitmap
+inline fun Bitmap.toDrawable(context: Context) = BitmapDrawable(context.resources, this)
 
 inline fun Bitmap.palette() = Palette.from(this)
 
