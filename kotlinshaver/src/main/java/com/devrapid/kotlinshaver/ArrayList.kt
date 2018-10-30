@@ -5,7 +5,7 @@ package com.devrapid.kotlinshaver
  * @since   11/8/17
  */
 fun <E> ArrayList<E>.removeRange(from: Int, to: Int): Boolean =
-    if (!(from in 0..size - 1 && to in 0..size - 1 && from > to)) {
+    if (!(from in 0 until size && to in 0 until size && from > to)) {
         false
     }
     else {
