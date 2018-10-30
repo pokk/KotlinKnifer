@@ -6,17 +6,16 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.WindowManager
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.appcompat.app.AlertDialog
 import com.example.kotlinknifer.R
 
 /**
@@ -31,11 +30,11 @@ inline fun View.resizeView(width: Int? = null, height: Int? = null) {
     layoutParams = newLayoutParams
 }
 
-inline fun View.visiable() {
+inline fun View.visible() {
     visibility = VISIBLE
 }
 
-inline fun View.invisiable() {
+inline fun View.invisible() {
     visibility = INVISIBLE
 }
 
@@ -43,7 +42,7 @@ inline fun View.gone() {
     visibility = GONE
 }
 
-inline fun View.isVisiable() = VISIBLE == visibility
+inline fun View.isVisible() = VISIBLE == visibility
 
 fun View.waitForMeasure(func: (v: View, w: Int, h: Int) -> Unit) {
     if (0 < width && 0 < height) {

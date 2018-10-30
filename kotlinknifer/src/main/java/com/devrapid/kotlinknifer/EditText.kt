@@ -1,11 +1,11 @@
 package com.devrapid.kotlinknifer
 
 import android.graphics.PorterDuff.Mode.SRC_IN
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.devrapid.kotlinshaver.accessible
 
 fun setCursorPointerColor(view: EditText, @ColorInt color: Int, @DrawableRes drawable: Int = -1) {

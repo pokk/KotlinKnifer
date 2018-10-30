@@ -12,8 +12,8 @@ import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
-import android.support.annotation.DrawableRes
-import android.support.v7.graphics.Palette
+import androidx.annotation.DrawableRes
+import androidx.palette.graphics.Palette
 
 /**
  * @author  jieyi
