@@ -6,6 +6,12 @@
 ![RxJava](https://img.shields.io/badge/RxJava-2.1.8-green.svg?style=flat-square)
 ![RxKotlin](https://img.shields.io/badge/RxKotlin-2.2.0-green.svg?style=flat-square)
 
+# ⚠️ Deprecated AppCompat library
+
+We don't support AppCompat library, from Kotlin 1.3.0. All android libraries change to AndroidX.
+
+
+
 The library has util tools as below:
 
 ### KotlinKnifer
