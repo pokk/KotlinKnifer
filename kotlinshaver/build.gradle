@@ -7,7 +7,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$kotlin_coroutine_version"
 
     compile "io.reactivex.rxjava2:rxkotlin:2.3.0"
-    compile "io.reactivex.rxjava2:rxjava:2.2.3"
+    compile "io.reactivex.rxjava2:rxjava:2.2.4"
 }
 
 sourceCompatibility = "1.8"
