@@ -21,11 +21,11 @@ inline fun gLaunch(
     noinline block: suspend CoroutineScope.() -> Unit
 ) = GlobalScope.launch(context, start, block)
 
-inline fun ui(noinline block: suspend CoroutineScope.() -> Unit) = gLaunch(Main, block = block)
+inline fun ui(noinline block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Main).launch(block = block)
 
-inline fun bkg(noinline block: suspend CoroutineScope.() -> Unit) = gLaunch(Default, block = block)
+inline fun bkg(noinline block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Default).launch(block = block)
 
-inline fun io(noinline block: suspend CoroutineScope.() -> Unit) = gLaunch(IO, block = block)
+inline fun io(noinline block: suspend CoroutineScope.() -> Unit) = CoroutineScope(IO).launch(block = block)
 
 // ---------------------- async
 
@@ -35,8 +35,8 @@ inline fun <T> gAsync(
     noinline block: suspend CoroutineScope.() -> T
 ) = GlobalScope.async(context, start, block)
 
-inline fun <T> aUI(noinline block: suspend CoroutineScope.() -> T) = gAsync(Main, block = block)
+inline fun <T> aUI(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Main).async(block = block)
 
-inline fun <T> aBKG(noinline block: suspend CoroutineScope.() -> T) = gAsync(Default, block = block)
+inline fun <T> aBKG(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Default).async(block = block)
 
-inline fun <T> aIO(noinline block: suspend CoroutineScope.() -> T) = gAsync(IO, block = block)
+inline fun <T> aIO(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(IO).async(block = block)
