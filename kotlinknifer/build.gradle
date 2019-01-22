@@ -36,6 +36,47 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0-alpha01"
     implementation "androidx.palette:palette:1.0.0"
     compile project(":kotlinshaver")
+
+    // Anko Commons
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+    // Anko Layouts
+    implementation "org.jetbrains.anko:anko-sdk25:0.10.8" // sdk15, sdk19, sdk21, sdk23 are also available
+    implementation "org.jetbrains.anko:anko-appcompat-v7:0.10.8"
+    // Coroutine listeners for Anko Layouts
+    implementation "org.jetbrains.anko:anko-sdk25-coroutines:0.10.8"
+    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:0.10.8"
+    // Appcompat-v7 (only Anko Commons)
+    implementation "org.jetbrains.anko:anko-appcompat-v7-commons:0.10.8"
+
+    // Appcompat-v7 (Anko Layouts)
+    implementation "org.jetbrains.anko:anko-appcompat-v7:0.10.8"
+    implementation "org.jetbrains.anko:anko-coroutines:0.10.8"
+
+    // CardView-v7
+    implementation "org.jetbrains.anko:anko-cardview-v7:0.10.8"
+
+    // Design
+    implementation "org.jetbrains.anko:anko-design:0.10.8"
+    implementation "org.jetbrains.anko:anko-design-coroutines:0.10.8"
+
+    // GridLayout-v7
+    implementation "org.jetbrains.anko:anko-gridlayout-v7:0.10.8"
+
+    // Percent
+    implementation "org.jetbrains.anko:anko-percent:0.10.8"
+
+    // RecyclerView-v7
+    implementation "org.jetbrains.anko:anko-recyclerview-v7:0.10.8"
+    implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:0.10.8"
+
+    // Support-v4 (only Anko Commons)
+    implementation "org.jetbrains.anko:anko-support-v4-commons:0.10.8"
+
+    // Support-v4 (Anko Layouts)
+    implementation "org.jetbrains.anko:anko-support-v4:0.10.8"
+
+    // ConstraintLayout
+    implementation "org.jetbrains.anko:anko-constraint-layout:0.10.8"
 }
 
 apply from: 'https://raw.githubusercontent.com/pokk/JCenterUploader/master/Uploader.gradle'

@@ -3,10 +3,10 @@ package com.devrapid.kotlinknifer
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntDef
-import com.devrapid.kotlinknifer.DrawableDriection.DRAWABLE_DIRECTION_BOTTOM
-import com.devrapid.kotlinknifer.DrawableDriection.DRAWABLE_DIRECTION_END
-import com.devrapid.kotlinknifer.DrawableDriection.DRAWABLE_DIRECTION_START
-import com.devrapid.kotlinknifer.DrawableDriection.DRAWABLE_DIRECTION_TOP
+import com.devrapid.kotlinknifer.DrawableDirectionConst.DRAWABLE_DIRECTION_BOTTOM
+import com.devrapid.kotlinknifer.DrawableDirectionConst.DRAWABLE_DIRECTION_END
+import com.devrapid.kotlinknifer.DrawableDirectionConst.DRAWABLE_DIRECTION_START
+import com.devrapid.kotlinknifer.DrawableDirectionConst.DRAWABLE_DIRECTION_TOP
 import kotlin.annotation.AnnotationRetention.SOURCE
 import kotlin.annotation.AnnotationTarget.FIELD
 import kotlin.annotation.AnnotationTarget.TYPE
@@ -16,7 +16,7 @@ import kotlin.annotation.AnnotationTarget.VALUE_PARAMETER
  * @author  jieyi
  * @since   09/11/18
  */
-object DrawableDriection {
+object DrawableDirectionConst {
     const val DRAWABLE_DIRECTION_START = 0x1
     const val DRAWABLE_DIRECTION_TOP = 0x2
     const val DRAWABLE_DIRECTION_END = 0x4

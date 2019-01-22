@@ -20,21 +20,21 @@ import androidx.palette.graphics.Palette
  * @since   11/20/17
  */
 fun Context.scaledDrawable(@DrawableRes drawableId: Int, width: Int, height: Int): Drawable {
-    val drawable = getDrawable(drawableId).apply {
+    val drawable = getDrawable(drawableId)?.apply {
         bounds = Rect(0, 0, width, height)
-    }
-    return ScaleDrawable(drawable, 0, width.toFloat(), height.toFloat()).drawable
+    } ?: throw NullPointerException()
+    return ScaleDrawable(drawable, 0, width.toFloat(), height.toFloat()).drawable ?: throw NullPointerException()
 }
 
 fun Context.scaledDrawable(@DrawableRes drawableId: Int, ratioWidth: Float, ratioHeight: Float): Drawable {
     var scaledWidth = 1f
     var scaledHeight = 1f
-    val drawable = getDrawable(drawableId).apply {
+    val drawable = getDrawable(drawableId)?.apply {
         scaledWidth = intrinsicWidth * ratioWidth
         scaledHeight = intrinsicHeight * ratioHeight
         bounds = Rect(0, 0, scaledWidth.toInt(), scaledHeight.toInt())
-    }
-    return ScaleDrawable(drawable, 0, scaledWidth, scaledHeight).drawable
+    } ?: throw NullPointerException()
+    return ScaleDrawable(drawable, 0, scaledWidth, scaledHeight).drawable ?: throw NullPointerException()
 }
 
 fun Context.scaledDrawable(@DrawableRes drawableId: Int, ratio: Float) =

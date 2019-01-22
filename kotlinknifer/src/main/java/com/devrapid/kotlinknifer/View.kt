@@ -42,6 +42,7 @@ inline fun View.gone() {
     visibility = GONE
 }
 
+@Deprecated("It's replaced by ktx", ReplaceWith("isVisible", "androidx.core.view.isVisible"))
 inline fun View.isVisible() = VISIBLE == visibility
 
 fun View.waitForMeasure(func: (v: View, w: Int, h: Int) -> Unit) {
