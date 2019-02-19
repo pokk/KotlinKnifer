@@ -94,9 +94,9 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:2.1.4'
+implementation 'com.devrapid.jieyi:kotlinknifer:2.1.5'
 
-implementation 'com.devrapid.jieyi:kotlinshaver:1.1.4'
+implementation 'com.devrapid.jieyi:kotlinshaver:1.1.5'
 ```
 
 Then you can use it!!!
@@ -107,14 +107,14 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>2.1.4</version>
+  <version>2.1.5</version>
   <type>pom</type>
 </dependency>
 
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinshaver</artifactId>
-  <version>1.1.4</version>
+  <version>1.1.5</version>
   <type>pom</type>
 </dependency>
 ```
@@ -135,14 +135,14 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:2.1.4', {
+implementation('com.devrapid.jieyi:kotlinknifer:2.1.5', {
   exclude group: 'com.google.code.gson', module: 'gson'
   exclude group: 'com.github.bumptech.glide', module: 'glide'
 })
 ```
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinshaverr:1.1.4', {
+implementation('com.devrapid.jieyi:kotlinshaverr:1.1.5', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
 })

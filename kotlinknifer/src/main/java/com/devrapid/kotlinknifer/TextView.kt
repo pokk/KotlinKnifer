@@ -33,6 +33,7 @@ annotation class DrawableDirection
 
 fun TextView.addDrawable(
     @DrawableRes drawableId: Int,
+    color: Int,
     @DrawableDirection direct: Int,
     ratioWidth: Float = 1f,
     ratioHeight: Float = 1f
@@ -40,7 +41,10 @@ fun TextView.addDrawable(
     // Modify the icon size.
     context.scaledDrawable(drawableId, ratioWidth, ratioHeight)
         // Modify the icon bound.
-        .apply { setBounds(0, 0, (minimumWidth * ratioWidth).toInt(), (minimumHeight * ratioHeight).toInt()) }
+        .apply {
+            setBounds(0, 0, (minimumWidth * ratioWidth).toInt(), (minimumHeight * ratioHeight).toInt())
+            if (color != 0) changeColor(color)
+        }
         .let {
             when (direct) {
                 DRAWABLE_DIRECTION_START -> setCompoundDrawables(it, null, null, null)
@@ -50,3 +54,41 @@ fun TextView.addDrawable(
             }
         }
 }
+
+fun TextView.addDrawable(
+    @DrawableRes drawableId: Int,
+    @DrawableDirection direct: Int,
+    ratioWidth: Float = 1f,
+    ratioHeight: Float = 1f
+) = addDrawable(drawableId, 0, direct, ratioWidth, ratioHeight)
+
+fun TextView.addDrawableWithIntrinsicBounds(
+    @DrawableRes drawableId: Int,
+    color: Int,
+    @DrawableDirection direct: Int,
+    ratioWidth: Float = 1f,
+    ratioHeight: Float = 1f
+) {
+    // Modify the icon size.
+    context.scaledDrawable(drawableId, ratioWidth, ratioHeight)
+        // Modify the icon bound.
+        .apply {
+            setBounds(0, 0, (minimumWidth * ratioWidth).toInt(), (minimumHeight * ratioHeight).toInt())
+            if (color != 0) changeColor(color)
+        }
+        .let {
+            when (direct) {
+                DRAWABLE_DIRECTION_START -> setCompoundDrawablesWithIntrinsicBounds(it, null, null, null)
+                DRAWABLE_DIRECTION_TOP -> setCompoundDrawablesWithIntrinsicBounds(null, it, null, null)
+                DRAWABLE_DIRECTION_END -> setCompoundDrawablesWithIntrinsicBounds(null, null, it, null)
+                DRAWABLE_DIRECTION_BOTTOM -> setCompoundDrawablesWithIntrinsicBounds(null, null, null, it)
+            }
+        }
+}
+
+fun TextView.addDrawableWithIntrinsicBounds(
+    @DrawableRes drawableId: Int,
+    @DrawableDirection direct: Int,
+    ratioWidth: Float = 1f,
+    ratioHeight: Float = 1f
+) = addDrawableWithIntrinsicBounds(drawableId, 0, direct, ratioWidth, ratioHeight)
