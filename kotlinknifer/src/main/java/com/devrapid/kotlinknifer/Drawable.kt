@@ -4,6 +4,8 @@ package com.devrapid.kotlinknifer
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -39,6 +41,10 @@ fun Context.scaledDrawable(@DrawableRes drawableId: Int, ratioWidth: Float, rati
 
 fun Context.scaledDrawable(@DrawableRes drawableId: Int, ratio: Float) =
     scaledDrawable(drawableId, ratio, ratio)
+
+inline fun Drawable.changeColor(color: Int) = apply {
+    colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+}
 
 inline fun Int.toDrawable(context: Context) = context.getDrawable(this)
 
