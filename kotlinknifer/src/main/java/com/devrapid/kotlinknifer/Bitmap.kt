@@ -3,6 +3,7 @@ package com.devrapid.kotlinknifer
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.BitmapRegionDecoder
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
@@ -74,6 +75,16 @@ fun Resources.createScaledBitmap(@DrawableRes drawableResId: Int, widthRatio: Fl
 
 fun Resources.createScaledBitmap(@DrawableRes drawableResId: Int, ratio: Float) =
     createScaledBitmap(drawableResId, ratio, ratio)
+
+fun Resources.createRegionBitmap(
+    drawableResId: Int,
+    rect: Rect,
+    opts: BitmapFactory.Options = BitmapFactory.Options()
+) = openRawResource(drawableResId).use {
+    // Create a region decoder.
+    val decoder = BitmapRegionDecoder.newInstance(it, false)
+    decoder.decodeRegion(rect, opts)
+}
 
 fun Drawable.toBitmap(): Bitmap {
     if (this is BitmapDrawable) return bitmap
