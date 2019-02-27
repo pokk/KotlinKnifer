@@ -135,14 +135,14 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:2.1.5', {
+implementation('com.devrapid.jieyi:kotlinknifer:2.1.6', {
   exclude group: 'com.google.code.gson', module: 'gson'
   exclude group: 'com.github.bumptech.glide', module: 'glide'
 })
 ```
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinshaverr:1.1.5', {
+implementation('com.devrapid.jieyi:kotlinshaverr:1.1.6', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
 })
