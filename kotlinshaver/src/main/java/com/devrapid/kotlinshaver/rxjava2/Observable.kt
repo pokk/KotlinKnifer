@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.devrapid.kotlinshaver
+package com.devrapid.kotlinshaver.rxjava2
 
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
@@ -20,11 +20,6 @@ import io.reactivex.internal.operators.observable.ObservableCreate
 import io.reactivex.internal.operators.single.SingleCreate
 import io.reactivex.subjects.PublishSubject
 
-/**
- *
- * @author  jieyi
- * @since   9/8/17
- */
 inline fun <T> observable(crossinline body: (ObservableEmitter<T>) -> Unit): Observable<T> =
     ObservableCreate { body(it) }
 

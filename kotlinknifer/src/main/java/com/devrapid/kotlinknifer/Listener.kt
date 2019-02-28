@@ -2,11 +2,6 @@ package com.devrapid.kotlinknifer
 
 import android.animation.Animator
 
-/**
- *
- * @author  jieyi
- * @since   6/12/17
- */
 fun animatorListener(init: AnimatorListenerWrapper.() -> Unit): Animator.AnimatorListener {
     val wrapper = AnimatorListenerWrapper()
 
@@ -15,9 +10,9 @@ fun animatorListener(init: AnimatorListenerWrapper.() -> Unit): Animator.Animato
     return onListener(wrapper)
 }
 
-    /**
-     * Using chain style for [animatorListener].
-     */
+/**
+ * Using chain style for [animatorListener].
+ */
 typealias animatorWithSelf = AnimatorListener.(animator: Animator) -> Unit
 
 class AnimatorListener : Animator.AnimatorListener {
@@ -40,9 +35,9 @@ class AnimatorListener : Animator.AnimatorListener {
         this.also { it.repeatFunction = onRepeatFun }
 }
 
-    /**
-     * Using DSL style for [animatorListener].
-     */
+/**
+ * Using DSL style for [animatorListener].
+ */
 typealias animatorEmpty = (animator: Animator) -> Unit
 
 class AnimatorListenerWrapper {

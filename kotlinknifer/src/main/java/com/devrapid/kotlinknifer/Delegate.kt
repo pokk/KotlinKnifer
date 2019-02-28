@@ -11,12 +11,6 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
- * Delegate methods.
- *
- * @author  jieyi
- * @since   6/12/17
- */
-/**
  * Wrap the [SoftReference] by kotlin delegate. Don't have to use [get]/[set] method
  * for accessing or assigning a variable each of times.
  *
@@ -125,10 +119,8 @@ class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var 
             is Long -> prefs.getLong(name, defaultValue as Long) as T
             is String -> prefs.getString(name, defaultValue as String) as T
             is Set<*> -> prefs.getStringSet(name, defaultValue as Set<String>) as T
-        // Using json format to deserialize a string to an object.
-            else -> this.gson.fromJson(prefs.getString(name,
-                                                       null) ?: throw KotlinNullPointerException("There is no kind of $name was stored in the shared preferences."),
-                                       objectType)
+            // Using json format to deserialize a string to an object.
+            else -> prefs.getString(name, null)?.let { this.gson.fromJson(it, objectType) } ?: defaultValue
         }
     }
 
@@ -143,7 +135,7 @@ class SharedPrefs<T>(var defaultValue: T, val objectType: Class<T>? = null, var 
                 is Long -> it.putLong(name, value as Long)
                 is String -> it.putString(name, value as String)
                 is Set<*> -> it.putStringSet(name, value as Set<String>)
-            // Using json format to serialize an object to a string.
+                // Using json format to serialize an object to a string.
                 else -> it.putString(name, this.gson.toJson(value))
             }
             this.onChange?.invoke()

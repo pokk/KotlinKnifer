@@ -7,10 +7,6 @@ import android.graphics.Rect
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
-/**
- * @author  jieyi
- * @since   11/8/17
- */
 inline fun View.hideSoftKeyboard() = run {
     (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
         .hideSoftInputFromWindow(windowToken, 0)

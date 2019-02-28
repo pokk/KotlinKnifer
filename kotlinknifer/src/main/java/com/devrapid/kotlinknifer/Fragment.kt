@@ -9,10 +9,6 @@ import androidx.fragment.app.FragmentTransaction
 import java.util.Stack
 
 /**
- * @author  jieyi
- * @since   2/15/17
- */
-/**
  * Adds a [Fragment] to this manager's layout.
  * Using the [replace] method, we couldn't obtain the fragments. There a way to get it is that
  * obtaining fragment by [findFragmentByTag]. For convenient, I recommend that using a [Stack]

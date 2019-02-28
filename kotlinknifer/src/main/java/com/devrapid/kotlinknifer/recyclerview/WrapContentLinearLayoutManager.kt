@@ -7,12 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devrapid.kotlinknifer.loge
 import com.devrapid.kotlinknifer.logw
 
-/**
- * Wrapper the linear layout manager for catching the exceptions and don't make app crash.
- *
- * @author  jieyi
- * @since   2018/01/09
- */
 class WrapContentLinearLayoutManager : LinearLayoutManager {
     constructor(context: Context) : super(context)
     constructor(context: Context, orientation: Int, reverseLayout: Boolean) : super(context, orientation, reverseLayout)

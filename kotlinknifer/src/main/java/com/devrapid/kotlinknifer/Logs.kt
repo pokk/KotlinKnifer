@@ -2,20 +2,10 @@ package com.devrapid.kotlinknifer
 
 import android.util.Log
 
-/**
- * Log Module
- *
- * @author Jieyi
- * @since 8/1/15
- */
 fun logv(vararg msg: Any?) = Logs.v(*msg)
-
 fun logd(vararg msg: Any?) = Logs.d(*msg)
-
 fun logi(vararg msg: Any?) = Logs.i(*msg)
-
 fun logw(vararg msg: Any?) = Logs.w(*msg)
-
 fun loge(vararg msg: Any?) = Logs.e(*msg)
 
 internal object Logs {

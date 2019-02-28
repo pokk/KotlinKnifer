@@ -1,26 +1,16 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package com.devrapid.kotlinknifer
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ScaleDrawable
-import android.renderscript.Allocation
-import android.renderscript.Element
-import android.renderscript.RenderScript
-import android.renderscript.ScriptIntrinsicBlur
 import androidx.annotation.DrawableRes
-import androidx.palette.graphics.Palette
 
-/**
- * @author  jieyi
- * @since   11/20/17
- */
 fun Context.scaledDrawable(@DrawableRes drawableId: Int, width: Int, height: Int): Drawable {
     val drawable = getDrawable(drawableId)?.apply {
         bounds = Rect(0, 0, width, height)
@@ -48,33 +38,16 @@ inline fun Drawable.changeColor(color: Int) = apply {
 
 inline fun Int.toDrawable(context: Context) = context.getDrawable(this)
 
-inline fun Bitmap.toDrawable(context: Context) = BitmapDrawable(context.resources, this)
+fun Drawable.toBitmap(): Bitmap {
+    if (this is BitmapDrawable) return bitmap
 
-inline fun Bitmap.palette() = Palette.from(this)
+    val width = if (bounds.isEmpty) intrinsicWidth else bounds.width()
+    val height = if (bounds.isEmpty) intrinsicHeight else bounds.height()
 
-inline fun Bitmap.palette(maxColorCount: Int) =
-    Palette.from(this).maximumColorCount(maxColorCount).generate()
-
-fun Context.blurBitmap(image: Bitmap, radius: Float = 25f, scale: Float = 0.4f): Bitmap {
-    val width = Math.round(image.width * scale)
-    val height = Math.round(image.height * scale)
-    // Because of the blurring, we don't have to use original bitmap to blur. It's able to reduce cost.
-    val scaledBitmap = Bitmap.createScaledBitmap(image, width, height, false)
-    // Create a image for blurring.
-    val blurBitmap = Bitmap.createBitmap(scaledBitmap)
-    val rs = RenderScript.create(this)
-    // RenderScript doesn't use VM to allocate memory, we have to do it by ourselves.
-    val tmpIn = Allocation.createFromBitmap(rs, scaledBitmap)
-    // The created Allocation is empty actually, copyTo() is necessary to fill the date.
-    val tmpOut = Allocation.createFromBitmap(rs, blurBitmap)
-
-    ScriptIntrinsicBlur.create(rs, Element.U8_4(rs)).apply {
-        setRadius(radius)
-        setInput(tmpIn)
-        forEach(tmpOut)
+    return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888).also {
+        Canvas(it).let {
+            setBounds(0, 0, it.width, it.height)
+            draw(it)
+        }
     }
-
-    tmpOut.copyTo(blurBitmap)
-
-    return blurBitmap
 }

@@ -5,11 +5,6 @@ package com.devrapid.kotlinshaver
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-/**
- *
- * @author  jieyi
- * @since   7/28/17
- */
 inline infix fun (() -> Unit).iff(condition: Any?): Any? {
     return when (condition) {
         is Boolean -> if (condition) this() else null

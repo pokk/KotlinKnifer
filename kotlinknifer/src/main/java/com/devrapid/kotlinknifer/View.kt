@@ -18,10 +18,6 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.app.AlertDialog
 import com.example.kotlinknifer.R
 
-/**
- * @author  jieyi
- * @since   4/12/17
- */
 inline fun View.resizeView(width: Int? = null, height: Int? = null) {
     val newLayoutParams = layoutParams?.apply {
         height?.let { this.height = it }
@@ -100,10 +96,10 @@ inline fun Activity.statusBarHeight() = Rect()
     .top
 
 fun Activity.changeStatusBarColorRes(@ColorRes colorRes: Int) =
-    setStatusBarColorBy { statusBarColor = getResColor(colorRes) }
+    setStatusBarColorBy { statusBarColor = getColorBy(colorRes) }
 
 fun Activity.changeStatusBarColor(@ColorInt color: Int, ratio: Float = 1f) =
-    setStatusBarColorBy { statusBarColor = getColorWithAlpha(color, ratio) }
+    setStatusBarColorBy { statusBarColor = ofAlpha(color, ratio) }
 
 internal inline fun Activity.setStatusBarColorBy(block: Window.() -> Unit) {
     if (Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT)

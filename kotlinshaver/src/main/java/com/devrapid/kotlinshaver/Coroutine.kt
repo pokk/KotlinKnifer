@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package com.devrapid.kotlinshaver
 
 import kotlinx.coroutines.CoroutineScope
@@ -35,8 +33,8 @@ inline fun <T> gAsync(
     noinline block: suspend CoroutineScope.() -> T
 ) = GlobalScope.async(context, start, block)
 
-inline fun <T> aUI(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Main).async(block = block)
+inline fun <T> uiAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Main).async(block = block)
 
-inline fun <T> aBKG(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Default).async(block = block)
+inline fun <T> bkgAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Default).async(block = block)
 
-inline fun <T> aIO(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(IO).async(block = block)
+inline fun <T> ioAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(IO).async(block = block)

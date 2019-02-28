@@ -5,10 +5,6 @@ import android.content.res.Resources
 import org.jetbrains.anko.px2dip
 import org.jetbrains.anko.px2sp
 
-/**
- * @author  jieyi
- * @since   11/24/17
- */
 /** Convert dp to px */
 fun Float.dp2px(context: Context) = this * context.resources.displayMetrics.density + 0.5f
 

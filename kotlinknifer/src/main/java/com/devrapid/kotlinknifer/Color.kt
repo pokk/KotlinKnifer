@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE", "EXTENSION_SHADOWED_BY_MEMBER")
-
 package com.devrapid.kotlinknifer
 
 import android.content.Context
@@ -8,12 +6,8 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 
-/**
- *
- * @author  jieyi
- * @since   5/30/17
- */
 /**
  * Add the alpha into the [Color] from resource id.
  *
@@ -23,38 +17,38 @@ import androidx.core.content.ContextCompat
  * @return transparent RGB integer resColor
  */
 @ColorInt
-inline fun Context.getResColorWithAlpha(@ColorRes resColor: Int, ratio: Float): Int =
-    this.getColorWithAlpha(this.getResColor(resColor), ratio)
+inline fun Context.getColorOfAlpha(@ColorRes resColor: Int, ratio: Float) =
+    ContextCompat.getColor(this, resColor).ofAlpha(ratio)
 
 @ColorInt
-inline fun View.getResColorWithAlpha(@ColorRes resColor: Int, ratio: Float): Int =
-    this.context.getResColorWithAlpha(resColor, ratio)
+inline fun Fragment.getColorOfAlpha(@ColorRes resColor: Int, ratio: Float) = getColor(resColor).ofAlpha(ratio)
+
+@ColorInt
+inline fun View.getColorOfAlpha(@ColorRes resColor: Int, ratio: Float) = getColor(resColor).ofAlpha(ratio)
 
 /**
  * Add the alpha into the Color.
  *
- * @param color opaque RGB integer color for ex: -11517920
  * @param ratio ratio of transparency for ex: 0.5f
  *
  * @return transparent RGB integer resColor
  */
 @ColorInt
-inline fun Context.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int {
-    val a: Int = Math.round(Color.alpha(color) * ratio)
+inline fun Int.ofAlpha(ratio: Float): Int {
+    val alpha = Math.round(Color.alpha(this) * ratio)
 
-    return Color.argb(a, Color.red(color), Color.green(color), Color.blue(color))
+    return Color.argb(alpha, Color.red(this), Color.green(this), Color.blue(this))
 }
 
+/**
+ * Get the [Color] from resource id.
+ *
+ * @param resColor opaque RGB integer resColor for ex: -11517920
+ *
+ * @return transparent RGB integer resColor
+ */
 @ColorInt
-inline fun View.getColorWithAlpha(@ColorInt color: Int, ratio: Float): Int =
-    this.context.getColorWithAlpha(color, ratio)
-
-@ColorInt
-inline fun Context.getColorInt(@ColorInt color: Int) =
-    Color.rgb(Color.red(color), Color.green(color), Color.blue(color))
-
-@ColorInt
-inline fun View.getColorInt(@ColorInt color: Int) = context.getColorInt(color)
+inline fun Fragment.getColor(@ColorRes resColor: Int) = ContextCompat.getColor(requireContext(), resColor)
 
 /**
  * Get the [Color] from resource id.
@@ -64,14 +58,7 @@ inline fun View.getColorInt(@ColorInt color: Int) = context.getColorInt(color)
  * @return transparent RGB integer resColor
  */
 @ColorInt
-inline fun Context.getResColor(@ColorRes resColor: Int): Int = ContextCompat.getColor(this, resColor)
+inline fun View.getColor(@ColorRes resColor: Int) = ContextCompat.getColor(context, resColor)
 
-/**
- * Get the [Color] from resource id.
- *
- * @param resColor opaque RGB integer resColor for ex: -11517920
- *
- * @return transparent RGB integer resColor
- */
 @ColorInt
-inline fun View.getResColor(@ColorRes resColor: Int): Int = ContextCompat.getColor(this.context, resColor)
+inline fun generateColorInt(@ColorInt color: Int) = Color.rgb(Color.red(color), Color.green(color), Color.blue(color))

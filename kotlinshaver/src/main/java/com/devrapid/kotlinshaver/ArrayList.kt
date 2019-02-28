@@ -1,14 +1,10 @@
 package com.devrapid.kotlinshaver
 
-/**
- * @author  jieyi
- * @since   11/8/17
- */
-fun <E> ArrayList<E>.removeRange(from: Int, to: Int): Boolean =
-    if (!(from in 0 until size && to in 0 until size && from > to)) {
+fun <E> ArrayList<E>.removeRange(range: IntRange) =
+    if (!(range.start in 0 until size && range.last in 0 until size && range.start > range.last)) {
         false
     }
     else {
-        subList(from, to).clear()
+        subList(range.start, range.last).clear()
         true
     }

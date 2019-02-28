@@ -1,15 +1,25 @@
 package com.devrapid.kotlinknifer
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapRegionDecoder
+import android.graphics.BitmapShader
 import android.graphics.Canvas
+import android.graphics.ComposeShader
+import android.graphics.Paint
+import android.graphics.PorterDuff
 import android.graphics.Rect
+import android.graphics.Shader
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
 import android.util.Size
 import androidx.annotation.DrawableRes
+import androidx.palette.graphics.Palette
 import java.io.ByteArrayOutputStream
 
 /**
@@ -86,19 +96,11 @@ fun Resources.createRegionBitmap(
     decoder.decodeRegion(rect, opts)
 }
 
-fun Drawable.toBitmap(): Bitmap {
-    if (this is BitmapDrawable) return bitmap
+inline fun Bitmap.toDrawable(context: Context) = BitmapDrawable(context.resources, this)
 
-    val width = if (bounds.isEmpty) intrinsicWidth else bounds.width()
-    val height = if (bounds.isEmpty) intrinsicHeight else bounds.height()
+inline fun Bitmap.palette() = Palette.from(this)
 
-    return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888).also {
-        Canvas(it).let {
-            setBounds(0, 0, it.width, it.height)
-            draw(it)
-        }
-    }
-}
+inline fun Bitmap.palette(maxColorCount: Int) = Palette.from(this).maximumColorCount(maxColorCount).generate()
 
 fun Bitmap.toBytes(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG, quality: Int = 100) {
     val stream = ByteArrayOutputStream()
@@ -118,6 +120,44 @@ fun Bitmap.resizeImageAsRatio(aspectRatio: Double): Bitmap = also {
 fun Bitmap?.safeRecycle() {
     if (this != null && !isRecycled)
         recycle()
+}
+
+fun Bitmap.decorateGradientMask(shaderDst: Shader): Bitmap {
+    val res = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(res)
+    // Create the source shader bitmap.
+    val shaderSrc = BitmapShader(this, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+
+    val paint = Paint().apply {
+        shader = ComposeShader(shaderDst, shaderSrc, PorterDuff.Mode.SRC_IN)
+    }
+    canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+
+    return res
+}
+
+fun Context.blurBitmap(image: Bitmap, radius: Float = 25f, scale: Float = 0.4f): Bitmap {
+    val width = Math.round(image.width * scale)
+    val height = Math.round(image.height * scale)
+    // Because of the blurring, we don't have to use original bitmap to blur. It's able to reduce cost.
+    val scaledBitmap = Bitmap.createScaledBitmap(image, width, height, false)
+    // Create a image for blurring.
+    val blurBitmap = Bitmap.createBitmap(scaledBitmap)
+    val rs = RenderScript.create(this)
+    // RenderScript doesn't use VM to allocate memory, we have to do it by ourselves.
+    val tmpIn = Allocation.createFromBitmap(rs, scaledBitmap)
+    // The created Allocation is empty actually, copyTo() is necessary to fill the date.
+    val tmpOut = Allocation.createFromBitmap(rs, blurBitmap)
+
+    ScriptIntrinsicBlur.create(rs, Element.U8_4(rs)).apply {
+        setRadius(radius)
+        setInput(tmpIn)
+        forEach(tmpOut)
+    }
+
+    tmpOut.copyTo(blurBitmap)
+
+    return blurBitmap
 }
 
 object ImageUtils {
