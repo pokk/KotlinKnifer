@@ -94,9 +94,9 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:2.1.5'
+implementation 'com.devrapid.jieyi:kotlinknifer:2.1.8'
 
-implementation 'com.devrapid.jieyi:kotlinshaver:1.1.5'
+implementation 'com.devrapid.jieyi:kotlinshaver:1.1.8'
 ```
 
 Then you can use it!!!
@@ -107,14 +107,14 @@ Then you can use it!!!
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinknifer</artifactId>
-  <version>2.1.5</version>
+  <version>2.1.8</version>
   <type>pom</type>
 </dependency>
 
 <dependency>
   <groupId>com.devrapid.jieyi</groupId>
   <artifactId>kotlinshaver</artifactId>
-  <version>1.1.5</version>
+  <version>1.1.8</version>
   <type>pom</type>
 </dependency>
 ```

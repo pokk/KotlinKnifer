@@ -16,6 +16,7 @@ import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.example.kotlinknifer.R
 
 inline fun View.resizeView(width: Int? = null, height: Int? = null) {
@@ -96,10 +97,10 @@ inline fun Activity.statusBarHeight() = Rect()
     .top
 
 fun Activity.changeStatusBarColorRes(@ColorRes colorRes: Int) =
-    setStatusBarColorBy { statusBarColor = getColorBy(colorRes) }
+    setStatusBarColorBy { statusBarColor = ContextCompat.getColor(context, colorRes) }
 
 fun Activity.changeStatusBarColor(@ColorInt color: Int, ratio: Float = 1f) =
-    setStatusBarColorBy { statusBarColor = ofAlpha(color, ratio) }
+    setStatusBarColorBy { statusBarColor = color.ofAlpha(ratio) }
 
 internal inline fun Activity.setStatusBarColorBy(block: Window.() -> Unit) {
     if (Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT)
