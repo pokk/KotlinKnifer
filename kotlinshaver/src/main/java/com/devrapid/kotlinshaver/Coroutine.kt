@@ -19,7 +19,7 @@ inline fun gLaunch(
     noinline block: suspend CoroutineScope.() -> Unit
 ) = GlobalScope.launch(context, start, block)
 
-inline fun ui(noinline block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Main).launch(block = block)
+inline fun ui(noinline block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Main.immediate).launch(block = block)
 
 inline fun bkg(noinline block: suspend CoroutineScope.() -> Unit) = CoroutineScope(Default).launch(block = block)
 
@@ -33,7 +33,8 @@ inline fun <T> gAsync(
     noinline block: suspend CoroutineScope.() -> T
 ) = GlobalScope.async(context, start, block)
 
-inline fun <T> uiAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Main).async(block = block)
+inline fun <T> uiAsync(noinline block: suspend CoroutineScope.() -> T) =
+    CoroutineScope(Main.immediate).async(block = block)
 
 inline fun <T> bkgAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Default).async(block = block)
 
