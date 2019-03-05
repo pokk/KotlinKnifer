@@ -22,12 +22,10 @@ import androidx.annotation.DrawableRes
 import androidx.palette.graphics.Palette
 import java.io.ByteArrayOutputStream
 
-/**
- * @author  jieyi
- * @since   2018/01/12
- */
-
-fun Resources.createBitmap(drawableResId: Int, opts: BitmapFactory.Options? = null, rect: Rect? = null): Bitmap? {
+fun Resources.createBitmap(
+    drawableResId: Int, opts: BitmapFactory.Options? = null,
+    rect: Rect? = null
+): Bitmap? {
     var bitmap: Bitmap? = null
     openRawResource(drawableResId).use {
         bitmap = BitmapFactory.decodeStream(it, rect, opts)
@@ -65,7 +63,7 @@ fun Bitmap.scale(widthRatio: Float, heightRatio: Float): Bitmap {
 fun Bitmap.scale(ratio: Float) = scale(ratio, ratio)
 
 fun Resources.createCompressedBitmap(
-    drawableResId: Int,
+    @DrawableRes drawableResId: Int,
     simpleSize: Int = 1,
     bitmapConf: Bitmap.Config? = null
 ): Bitmap {

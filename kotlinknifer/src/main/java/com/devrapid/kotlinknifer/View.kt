@@ -82,15 +82,13 @@ fun Context.alert(message: Int, title: Int? = null, init: (AlertDialog.Builder.(
         init?.let { init() }
     }
 
-inline fun Context.navigationBarHeiht() =
-    resources.getIdentifier("navigation_bar_height", "dimen", "android")
-        .takeIf { 0 < it }
-        ?.let { resources.getDimensionPixelSize(it) } ?: 0
+inline fun Context.navigationBarHeiht() = getIdentifier("navigation_bar_height", "dimen", "android")
+                                              .takeIf { 0 < it }
+                                              ?.let { getDimenPixelSize(it) } ?: 0
 
-inline fun Context.statusBarHeight() =
-    resources.getIdentifier("status_bar_height", "dimen", "android")
-        .takeIf { 0 < it }
-        ?.let { resources.getDimensionPixelSize(it) } ?: 0
+inline fun Context.statusBarHeight() = getIdentifier("status_bar_height", "dimen", "android")
+                                           .takeIf { 0 < it }
+                                           ?.let { getDimenPixelSize(it) } ?: 0
 
 inline fun Activity.statusBarHeight() = Rect()
     .apply { window.decorView.getWindowVisibleDisplayFrame(this) }

@@ -4,12 +4,6 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-/**
- * The item decorator for horizontal recycler view.
- *
- * @author  jieyi
- * @since   11/11/17
- */
 class HorizontalItemDecorator(private val space: Int) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val position: Int = parent.getChildAdapterPosition(view)

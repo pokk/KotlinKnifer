@@ -4,12 +4,6 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-/**
- * The item decorator for vertical type recycler view.
- *
- * @author  jieyi
- * @since   11/11/17
- */
 class VerticalItemDecorator(
     private val topBottom: Int,
     private val leftRight: Int = topBottom

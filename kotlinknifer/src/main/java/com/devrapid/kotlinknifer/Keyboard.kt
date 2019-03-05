@@ -30,7 +30,7 @@ fun isShowingSoftKeyboard(rootView: View): Boolean {
 
         val heightDiff = bottom - r.bottom
 
-        heightDiff > softKeyboardHeight * resources.displayMetrics.density
+        heightDiff > softKeyboardHeight * displayMetrics().density
     }
 }
 
