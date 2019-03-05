@@ -26,7 +26,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 Properties gradleProperties = new Properties()
 gradleProperties.load(project.rootProject.file('gradle.properties').newDataInputStream())
 
-version = gradleProperties.getProperty("proj_kotlin_version")
+version = gradleProperties.getProperty("proj_version")
 group = gradleProperties.getProperty("proj_group")
 
 install {
@@ -37,7 +37,7 @@ install {
                 name gradleProperties.getProperty("proj_kotlin_libname")
                 groupId gradleProperties.getProperty("proj_group")
                 artifactId gradleProperties.getProperty("proj_kotlin_artifactid")
-                version gradleProperties.getProperty("proj_kotlin_version")
+                version gradleProperties.getProperty("proj_version")
                 packaging 'aar'
                 url gradleProperties.getProperty("proj_websiteurl")
                 description gradleProperties.getProperty("proj_description")
