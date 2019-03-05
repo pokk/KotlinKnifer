@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -39,3 +40,11 @@ inline fun <T> uiAsync(noinline block: suspend CoroutineScope.() -> T) =
 inline fun <T> bkgAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(Default).async(block = block)
 
 inline fun <T> ioAsync(noinline block: suspend CoroutineScope.() -> T) = CoroutineScope(IO).async(block = block)
+
+// ----------------------- with context
+
+suspend fun <T> uiSwitch(block: suspend CoroutineScope.() -> T) = withContext(Main.immediate, block)
+
+suspend fun <T> bkgSwitch(block: suspend CoroutineScope.() -> T) = withContext(Default, block)
+
+suspend fun <T> ioSwitch(block: suspend CoroutineScope.() -> T) = withContext(IO, block)
