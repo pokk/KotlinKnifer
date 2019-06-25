@@ -6,4 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.devrapid.utils.MainActivity">
 
+    <ViewStub
+        android:id="@+id/vs_a"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/v_a"
+        android:layout="@layout/stub_a"/>
+
+    <ViewStub
+        android:id="@+id/vs_b"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/v_b"
+        android:layout="@layout/stub_b"/>
 </FrameLayout>
