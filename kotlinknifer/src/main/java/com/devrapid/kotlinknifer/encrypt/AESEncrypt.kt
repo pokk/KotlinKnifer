@@ -8,19 +8,19 @@ import javax.crypto.spec.SecretKeySpec
 
 object AESEncrypt {
     fun encrypt(data: String, key: String) =
-        Base64.encodeToString(ase_256_encrypt(data, key), Base64.DEFAULT)
+        Base64.encodeToString(ase256Encrypt(data, key), Base64.DEFAULT)
 
     fun decrypt(encrypted: String, key: String) =
-        String(ase_256_decrypt(Base64.decode(encrypted, Base64.DEFAULT), key))
+        String(ase256Decrypt(Base64.decode(encrypted, Base64.DEFAULT), key))
 
-    private fun ase_256_encrypt(data: String, key: String): ByteArray {
+    private fun ase256Encrypt(data: String, key: String): ByteArray {
         val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
         val keySpec = SecretKeySpec(getCipherKey(key), "SHA-256")
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, getIvSpec())
         return cipher.doFinal(data.toByteArray())
     }
 
-    private fun ase_256_decrypt(dataByte: ByteArray, key: String): ByteArray {
+    private fun ase256Decrypt(dataByte: ByteArray, key: String): ByteArray {
         val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
         val keySpec = SecretKeySpec(getCipherKey(key), "SHA-256")
         cipher.init(Cipher.DECRYPT_MODE, keySpec, getIvSpec())

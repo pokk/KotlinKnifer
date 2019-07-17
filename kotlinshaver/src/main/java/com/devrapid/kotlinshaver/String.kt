@@ -4,7 +4,7 @@ import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Locale
 
-inline fun String.formatToMoneyKarma() = DecimalFormat("###,###").format(java.lang.Double.parseDouble(this))
+inline fun String.formatToMoneyKarma() = DecimalFormat("###,###").format(toDouble())
 
 inline fun Long.toMoneyFormat(locale: Locale?) =
     (locale?.let(NumberFormat::getInstance) ?: NumberFormat.getInstance()).format(this)

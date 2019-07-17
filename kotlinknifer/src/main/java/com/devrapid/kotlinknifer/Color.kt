@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import kotlin.math.roundToInt
 
 /**
  * Add the alpha into the [Color] from resource id.
@@ -35,7 +36,7 @@ inline fun View.getColorOfAlpha(@ColorRes resColor: Int, ratio: Float) = getColo
  */
 @ColorInt
 inline fun Int.ofAlpha(ratio: Float): Int {
-    val alpha = Math.round(Color.alpha(this) * ratio)
+    val alpha = (Color.alpha(this) * ratio).roundToInt()
 
     return Color.argb(alpha, Color.red(this), Color.green(this), Color.blue(this))
 }

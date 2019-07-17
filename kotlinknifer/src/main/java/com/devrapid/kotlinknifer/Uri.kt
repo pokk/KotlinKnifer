@@ -9,6 +9,8 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.provider.OpenableColumns
+import java.io.File
 
 /**
  * @author  Jieyi Wu
@@ -35,13 +37,17 @@ fun Uri.toPath(context: Context): String? {
                 "${Environment.getExternalStorageDirectory()}/${split[1]}"
             }
             // TODO handle non-primary volumes
-            else null
+            else {
+                "storage/${docId.replace(":", "/")}"
+            }
         }
         // DownloadsProvider
         else if (isDownloadsDocument()) {
-            val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
-                                                        java.lang.Long.valueOf(docId))
-
+            getFilePath(context, this)?.let {
+                return "${Environment.getExternalStorageDirectory()}/Download/$it"
+            }
+            val contentUri =
+                ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), docId.toLong())
             getDataColumn(context, contentUri)
         }
         // MediaProvider
@@ -56,12 +62,17 @@ fun Uri.toPath(context: Context): String? {
             val selection = "_id=?"
             val selectionArgs = arrayOf(split[1])
 
+            if (contentUri == null) return null
             getDataColumn(context, contentUri, selection, selectionArgs)
         }
         else null
     }
     // MediaStore (and general)
     else if ("content".equals(scheme, ignoreCase = true)) {
+        // Return the remote address.
+        if (isGooglePhotosUri()) {
+            return lastPathSegment
+        }
         getDataColumn(context, this)
     }
     // File
@@ -69,6 +80,23 @@ fun Uri.toPath(context: Context): String? {
         path
     }
     else null
+}
+
+fun Uri.getRealFileName(context: Context): String {
+    val uriString = toString()
+    val file = File(uriString)
+    return when {
+        uriString.startsWith("content://") ->
+            context.contentResolver.query(this, null, null, null, null)?.use {
+                if (it.moveToFirst()) {
+                    it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                }
+                else
+                    null
+            }.orEmpty()
+        uriString.startsWith("file://") -> file.name.orEmpty()
+        else -> ""
+    }
 }
 
 /**
@@ -83,22 +111,35 @@ fun Uri.toPath(context: Context): String? {
  */
 internal fun getDataColumn(
     context: Context,
-    uri: Uri?,
+    uri: Uri,
     selection: String? = null,
     selectionArgs: Array<String>? = null
 ): String? {
     val column = "_data"
     val projection = arrayOf(column)
-    val cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
 
-    cursor.use {
+    return context.contentResolver.query(uri, projection, selection, selectionArgs, null)?.use {
         if (it.moveToFirst()) {
             val columnIndex = it.getColumnIndexOrThrow(column)
 
-            return it.getString(columnIndex)
+            it.getString(columnIndex)
         }
+        else
+            null
     }
-    return null
+}
+
+internal fun getFilePath(context: Context, uri: Uri): String? {
+    val projection = arrayOf(MediaStore.MediaColumns.DISPLAY_NAME)
+
+    return context.contentResolver.query(uri, projection, null, null, null)?.use {
+        if (it.moveToFirst()) {
+            val index = it.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
+            return it.getString(index)
+        }
+        else
+            null
+    }
 }
 
 /**
@@ -115,3 +156,8 @@ inline fun Uri.isDownloadsDocument() = "com.android.providers.downloads.document
  * The Uri authority is MediaProvider.
  */
 inline fun Uri.isMediaDocument() = "com.android.providers.media.documents" == authority
+
+/**
+ * The Uri authority is Google Photos Uri.
+ */
+inline fun Uri.isGooglePhotosUri() = "com.google.android.apps.photos.content" == authority

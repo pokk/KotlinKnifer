@@ -9,15 +9,15 @@ fun logw(vararg msg: Any?) = Logs.w(*msg)
 fun loge(vararg msg: Any?) = Logs.e(*msg)
 
 internal object Logs {
-    var _IS_DEBUG: Boolean = java.lang.Boolean.TRUE  // Debug mode's switch, default is turn off.
-    var TAG: String = "MY_LOG"  // TAG
-    private const val COLON: String = ":"
-    private const val LEFT_PARENTHESIS: String = "("
-    private const val RIGHT_PARENTHESIS: String = ")"
-    private const val SPACE_STRING: String = " "
-    private const val METHOD_INDEX: Int = 4
-    private val lockLog: Any = Any()  // Avoid the threading's race condition.
-    private val strBuilder: StringBuilder = StringBuilder()  // String builder.
+    var _IS_DEBUG = true  // Debug mode's switch, default is turn off.
+    var TAG = "MY_LOG"  // TAG
+    private const val COLON = ":"
+    private const val LEFT_PARENTHESIS = "("
+    private const val RIGHT_PARENTHESIS = ")"
+    private const val SPACE_STRING = " "
+    private const val METHOD_INDEX = 4
+    private val lockLog = Any()  // Avoid the threading's race condition.
+    private val strBuilder = StringBuilder()  // String builder.
 
     /**
      * VERBOSE log.
@@ -119,7 +119,7 @@ internal object Logs {
         LogWrapper().debugCheck(Log::class.java, getLogMsg(msgString))
     }
 
-    private fun newCombinedString(block: StringBuilder.() -> Unit): String =
+    private fun newCombinedString(block: StringBuilder.() -> Unit) =
         strBuilder.apply { setLength(0) }.apply(block).toString()
 
     /**
@@ -128,9 +128,9 @@ internal object Logs {
      * @param values multiple arguments.
      * @return output string message
      */
-    private fun combineInputArguments(vararg values: Any?): String = newCombinedString {
-        values.filter { null != it }
-            .forEach { append(it.toString()).append(com.devrapid.kotlinknifer.Logs.SPACE_STRING) }
+    private fun combineInputArguments(vararg values: Any?) = newCombinedString {
+        values.filterNotNull()
+            .forEach { append(it.toString()).append(SPACE_STRING) }
     }
 
     /**
@@ -139,7 +139,7 @@ internal object Logs {
      * @param msg log message.
      * @return meta information + msg.
      */
-    private fun getLogMsg(msg: String?): String = getMetaInfo(null == msg) + COLON + (msg.orEmpty())
+    private fun getLogMsg(msg: String?) = getMetaInfo(null == msg) + COLON + (msg.orEmpty())
 
     /**
      * Combine the meta information and exception msg.
@@ -147,7 +147,7 @@ internal object Logs {
      * @param msg exception msg.
      * @return meta information + exception msg.
      */
-    private fun getExceptionMsg(msg: Exception): String = newCombinedString {
+    private fun getExceptionMsg(msg: Exception) = newCombinedString {
         Throwable().stackTrace[6].let { append("${it.methodName}(${it.fileName}:${it.lineNumber}): ${msg.message}\n") }
         msg.stackTrace.forEach { append(it).append("\n") }
     }
@@ -166,11 +166,11 @@ internal object Logs {
 
         return newCombinedString {
             append(ste[stackIndex].methodName)
-            append(com.devrapid.kotlinknifer.Logs.LEFT_PARENTHESIS)
+            append(LEFT_PARENTHESIS)
             append(ste[stackIndex].fileName)
-            append(com.devrapid.kotlinknifer.Logs.COLON)
+            append(COLON)
             append(ste[stackIndex].lineNumber)
-            append(com.devrapid.kotlinknifer.Logs.RIGHT_PARENTHESIS)
+            append(RIGHT_PARENTHESIS)
         }
     }
 }
