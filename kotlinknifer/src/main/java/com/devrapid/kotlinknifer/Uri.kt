@@ -104,7 +104,7 @@ fun Uri.getRealFileName(context: Context): String {
 }
 
 @Throws(IOException::class)
-private fun Uri.readText(context: Context) = buildString {
+fun Uri.readText(context: Context) = buildString {
     context.contentResolver.openInputStream(this@readText)?.use { inputStream ->
         BufferedReader(InputStreamReader(inputStream)).use { reader ->
             var line = reader.readLine()
