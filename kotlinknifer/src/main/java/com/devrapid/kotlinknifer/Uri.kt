@@ -10,7 +10,10 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import java.io.BufferedReader
 import java.io.File
+import java.io.IOException
+import java.io.InputStreamReader
 
 /**
  * @author  Jieyi Wu
@@ -47,7 +50,8 @@ fun Uri.toPath(context: Context): String? {
                 return "${Environment.getExternalStorageDirectory()}/Download/$it"
             }
             val contentUri =
-                ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), docId.toLong())
+                ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
+                                           docId.toLong())
             getDataColumn(context, contentUri)
         }
         // MediaProvider
@@ -96,6 +100,19 @@ fun Uri.getRealFileName(context: Context): String {
             }.orEmpty()
         uriString.startsWith("file://") -> file.name.orEmpty()
         else -> ""
+    }
+}
+
+@Throws(IOException::class)
+private fun Uri.readText(context: Context) = buildString {
+    context.contentResolver.openInputStream(this@readText)?.use { inputStream ->
+        BufferedReader(InputStreamReader(inputStream)).use { reader ->
+            var line = reader.readLine()
+            while (line != null) {
+                append(line)
+                line = reader.readLine()
+            }
+        }
     }
 }
 
