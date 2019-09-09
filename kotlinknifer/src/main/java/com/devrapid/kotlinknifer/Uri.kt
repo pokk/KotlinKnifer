@@ -10,6 +10,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import com.devrapid.kotlinshaver.copyFrom
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
@@ -115,6 +116,17 @@ fun Uri.readText(context: Context) = buildString {
         }
     }
 }
+
+@Throws(NullPointerException::class)
+fun Uri.toFile(context: Context, prefix: String = "temp", suffix: String? = null) =
+    File.createTempFile(prefix, suffix).also {
+        try {
+            it.copyFrom(requireNotNull(context.contentResolver.openInputStream(this)))
+        }
+        catch (e: IllegalArgumentException) {
+            throw NullPointerException(e.localizedMessage)
+        }
+    }
 
 /**
  * Get the value of the data column for this Uri. This is useful for

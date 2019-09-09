@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.devrapid.kotlinknifer
 
 import android.app.Activity
@@ -26,14 +28,18 @@ inline fun Context.getAnimation(@AnimatorRes @AnimRes id: Int) = resources.getAn
 inline fun Context.getIdentifier(name: String, defType: String, defPackage: String) =
     resources.getIdentifier(name, defType, defPackage)
 
-inline fun Context.getDrawable(@DrawableRes id: Int, theme: Theme? = null) = resources.getDrawable(id, theme)
+inline fun Context.getDrawable(@DrawableRes id: Int, theme: Theme? = null) =
+    resources.getDrawable(id, theme)
 
 @RequiresApi(Build.VERSION_CODES.O)
 inline fun Context.getFont(@FontRes id: Int) = resources.getFont(id)
 
 inline fun Context.displayMetrics() = resources.displayMetrics
 
-inline fun Context.createBitmap(@DrawableRes id: Int, opts: BitmapFactory.Options? = null, rect: Rect? = null) =
+inline fun Context.createBitmap(
+    @DrawableRes id: Int, opts: BitmapFactory.Options? = null,
+    rect: Rect? = null
+) =
     resources.createBitmap(id, opts, rect)
 
 inline fun Context.obtainBitmapSize(@DrawableRes id: Int) = resources.obtainBitmapSize(id)
@@ -49,7 +55,8 @@ inline fun Context.createScaledBitmap(@DrawableRes id: Int, width: Int, height: 
 inline fun Context.createScaledBitmap(@DrawableRes id: Int, widthRatio: Float, heightRatio: Float) =
     resources.createScaledBitmap(id, widthRatio, heightRatio)
 
-inline fun Context.createScaledBitmap(@DrawableRes id: Int, ratio: Float) = resources.createScaledBitmap(id, ratio)
+inline fun Context.createScaledBitmap(@DrawableRes id: Int, ratio: Float) =
+    resources.createScaledBitmap(id, ratio)
 
 inline fun Context.createRegionBitmap(
     @DrawableRes id: Int, rect: Rect,
@@ -67,14 +74,19 @@ inline fun Activity.getAnimation(@AnimatorRes @AnimRes id: Int) = resources.getA
 inline fun Activity.getIdentifier(name: String, defType: String, defPackage: String) =
     resources.getIdentifier(name, defType, defPackage)
 
-inline fun Activity.getDrawable(@DrawableRes id: Int, theme: Theme? = null) = resources.getDrawable(id, theme)
+inline fun Activity.getDrawable(@DrawableRes id: Int, theme: Theme? = null) =
+    resources.getDrawable(id, theme)
+
 @RequiresApi(Build.VERSION_CODES.O)
 
 inline fun Activity.getFont(@FontRes id: Int) = resources.getFont(id)
 
 inline fun Activity.displayMetrics() = resources.displayMetrics
 
-inline fun Activity.createBitmap(@DrawableRes id: Int, opts: BitmapFactory.Options? = null, rect: Rect? = null) =
+inline fun Activity.createBitmap(
+    @DrawableRes id: Int, opts: BitmapFactory.Options? = null,
+    rect: Rect? = null
+) =
     resources.createBitmap(id, opts, rect)
 
 inline fun Activity.obtainBitmapSize(@DrawableRes id: Int) = resources.obtainBitmapSize(id)
@@ -87,10 +99,14 @@ inline fun Activity.createCompressedBitmap(
 inline fun Activity.createScaledBitmap(@DrawableRes id: Int, width: Int, height: Int) =
     resources.createScaledBitmap(id, width, height)
 
-inline fun Activity.createScaledBitmap(@DrawableRes id: Int, widthRatio: Float, heightRatio: Float) =
+inline fun Activity.createScaledBitmap(
+    @DrawableRes id: Int, widthRatio: Float,
+    heightRatio: Float
+) =
     resources.createScaledBitmap(id, widthRatio, heightRatio)
 
-inline fun Activity.createScaledBitmap(@DrawableRes id: Int, ratio: Float) = resources.createScaledBitmap(id, ratio)
+inline fun Activity.createScaledBitmap(@DrawableRes id: Int, ratio: Float) =
+    resources.createScaledBitmap(id, ratio)
 
 inline fun Activity.createRegionBitmap(
     @DrawableRes id: Int, rect: Rect,
@@ -108,14 +124,18 @@ inline fun Fragment.getAnimation(@AnimatorRes @AnimRes id: Int) = resources.getA
 inline fun Fragment.getIdentifier(name: String, defType: String, defPackage: String) =
     resources.getIdentifier(name, defType, defPackage)
 
-inline fun Fragment.getDrawable(@DrawableRes id: Int, theme: Theme? = null) = resources.getDrawable(id, theme)
+inline fun Fragment.getDrawable(@DrawableRes id: Int, theme: Theme? = null) =
+    resources.getDrawable(id, theme)
 
 @RequiresApi(Build.VERSION_CODES.O)
 inline fun Fragment.getFont(@FontRes id: Int) = resources.getFont(id)
 
 inline fun Fragment.displayMetrics() = resources.displayMetrics
 
-inline fun Fragment.createBitmap(@DrawableRes id: Int, opts: BitmapFactory.Options? = null, rect: Rect? = null) =
+inline fun Fragment.createBitmap(
+    @DrawableRes id: Int, opts: BitmapFactory.Options? = null,
+    rect: Rect? = null
+) =
     resources.createBitmap(id, opts, rect)
 
 inline fun Fragment.obtainBitmapSize(@DrawableRes id: Int) = resources.obtainBitmapSize(id)
@@ -128,10 +148,15 @@ inline fun Fragment.createCompressedBitmap(
 inline fun Fragment.createScaledBitmap(@DrawableRes id: Int, width: Int, height: Int) =
     resources.createScaledBitmap(id, width, height)
 
-inline fun Fragment.createScaledBitmap(@DrawableRes id: Int, widthRatio: Float, heightRatio: Float) =
+inline fun Fragment.createScaledBitmap(
+    @DrawableRes id: Int, widthRatio: Float,
+    heightRatio: Float
+) =
     resources.createScaledBitmap(id, widthRatio, heightRatio)
 
-inline fun Fragment.createScaledBitmap(@DrawableRes id: Int, ratio: Float) = resources.createScaledBitmap(id, ratio)
+inline fun Fragment.createScaledBitmap(@DrawableRes id: Int, ratio: Float) =
+    resources.createScaledBitmap(id, ratio)
+
 inline fun Fragment.createRegionBitmap(
     @DrawableRes id: Int, rect: Rect,
     opts: BitmapFactory.Options = BitmapFactory.Options()
@@ -148,19 +173,26 @@ inline fun View.getAnimation(@AnimatorRes @AnimRes id: Int) = resources.getAnima
 inline fun View.getIdentifier(name: String, defType: String, defPackage: String) =
     resources.getIdentifier(name, defType, defPackage)
 
-inline fun View.getDrawable(@DrawableRes id: Int, theme: Theme? = null) = resources.getDrawable(id, theme)
+inline fun View.getDrawable(@DrawableRes id: Int, theme: Theme? = null) =
+    resources.getDrawable(id, theme)
 
 @RequiresApi(Build.VERSION_CODES.O)
 inline fun View.getFont(@FontRes id: Int) = resources.getFont(id)
 
 inline fun View.displayMetrics() = resources.displayMetrics
 
-inline fun View.createBitmap(@DrawableRes id: Int, opts: BitmapFactory.Options? = null, rect: Rect? = null) =
+inline fun View.createBitmap(
+    @DrawableRes id: Int, opts: BitmapFactory.Options? = null,
+    rect: Rect? = null
+) =
     resources.createBitmap(id, opts, rect)
 
 inline fun View.obtainBitmapSize(@DrawableRes id: Int) = resources.obtainBitmapSize(id)
 
-inline fun View.createCompressedBitmap(@DrawableRes id: Int, simpleSize: Int = 1, bitmapConf: Bitmap.Config? = null) =
+inline fun View.createCompressedBitmap(
+    @DrawableRes id: Int, simpleSize: Int = 1,
+    bitmapConf: Bitmap.Config? = null
+) =
     resources.createCompressedBitmap(id, simpleSize, bitmapConf)
 
 inline fun View.createScaledBitmap(@DrawableRes id: Int, width: Int, height: Int) =
@@ -169,7 +201,8 @@ inline fun View.createScaledBitmap(@DrawableRes id: Int, width: Int, height: Int
 inline fun View.createScaledBitmap(@DrawableRes id: Int, widthRatio: Float, heightRatio: Float) =
     resources.createScaledBitmap(id, widthRatio, heightRatio)
 
-inline fun View.createScaledBitmap(@DrawableRes id: Int, ratio: Float) = resources.createScaledBitmap(id, ratio)
+inline fun View.createScaledBitmap(@DrawableRes id: Int, ratio: Float) =
+    resources.createScaledBitmap(id, ratio)
 
 inline fun View.createRegionBitmap(
     @DrawableRes id: Int, rect: Rect,

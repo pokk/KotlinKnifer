@@ -1,10 +1,10 @@
 package com.devrapid.kotlinshaver
 
 fun <E> ArrayList<E>.removeRange(range: IntRange) =
-    if (!(range.start in 0 until size && range.last in 0 until size && range.start > range.last)) {
+    if (!(range.first in 0 until size && range.last in 0 until size && range.first > range.last)) {
         false
     }
     else {
-        subList(range.start, range.last).clear()
+        subList(range.first, range.last).clear()
         true
     }

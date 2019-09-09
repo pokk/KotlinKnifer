@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.devrapid.kotlinknifer
 
 import android.content.Context
