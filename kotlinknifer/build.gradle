@@ -25,14 +25,14 @@ kotlin {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     // 'api' can also import to the new project with this.
-    api "com.google.code.gson:gson:2.8.5"
+    implementation "com.google.code.gson:gson:2.8.6"
     // 'implementation' can't import to the new project.
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$kotlin_coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.core:core-ktx:1.1.0"
-    implementation "androidx.recyclerview:recyclerview:1.1.0-beta04"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-beta05"
     implementation "androidx.palette:palette:1.0.0"
     api project(":kotlinshaver")
 }
