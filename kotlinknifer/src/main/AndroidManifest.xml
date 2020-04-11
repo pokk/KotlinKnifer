@@ -1,5 +1,5 @@
 <manifest
-    package="com.example.kotlinknifer"
+    package="com.devrapid.kotlinknifer"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
