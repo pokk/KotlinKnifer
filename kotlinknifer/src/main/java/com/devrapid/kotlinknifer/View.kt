@@ -7,9 +7,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.os.Build
 import android.view.View
-import android.view.View.GONE
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.WindowManager
@@ -17,7 +15,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import com.example.kotlinknifer.R
 
 inline fun View.resizeView(width: Int? = null, height: Int? = null) {
     val newLayoutParams = layoutParams?.apply {
