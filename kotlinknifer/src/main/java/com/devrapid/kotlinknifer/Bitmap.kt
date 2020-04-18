@@ -102,7 +102,7 @@ inline fun Bitmap.palette() = Palette.from(this)
 
 inline fun Bitmap.palette(maxColorCount: Int) = Palette.from(this).maximumColorCount(maxColorCount).generate()
 
-fun Bitmap.toBytes(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG, quality: Int = 100) {
+fun Bitmap.toBytes(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG, quality: Int = 100) = run {
     val stream = ByteArrayOutputStream()
     compress(format, quality, stream)
     stream.toByteArray()
