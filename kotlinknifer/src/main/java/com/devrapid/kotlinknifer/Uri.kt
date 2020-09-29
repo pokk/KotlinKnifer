@@ -17,8 +17,8 @@ import java.io.IOException
 import java.io.InputStreamReader
 
 /**
- * @author  Jieyi Wu
- * @since   2018/03/23
+ * @author Jieyi Wu
+ * @since 2018/03/23
  */
 /**
  * For above [Build.VERSION_CODES.KITKAT], convert the uri to the absolute path.
@@ -96,8 +96,9 @@ fun Uri.getRealFileName(context: Context): String {
                 if (it.moveToFirst()) {
                     it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                 }
-                else
+                else {
                     null
+                }
             }.orEmpty()
         uriString.startsWith("file://") -> file.name.orEmpty()
         else -> ""
@@ -142,7 +143,7 @@ internal fun getDataColumn(
     context: Context,
     uri: Uri,
     selection: String? = null,
-    selectionArgs: Array<String>? = null
+    selectionArgs: Array<String>? = null,
 ): String? {
     val column = "_data"
     val projection = arrayOf(column)
@@ -153,8 +154,9 @@ internal fun getDataColumn(
 
             it.getString(columnIndex)
         }
-        else
+        else {
             null
+        }
     }
 }
 
@@ -166,8 +168,9 @@ internal fun getFilePath(context: Context, uri: Uri): String? {
             val index = it.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
             return it.getString(index)
         }
-        else
+        else {
             null
+        }
     }
 }
 

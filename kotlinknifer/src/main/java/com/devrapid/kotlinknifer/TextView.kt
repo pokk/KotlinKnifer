@@ -13,8 +13,8 @@ import kotlin.annotation.AnnotationTarget.TYPE
 import kotlin.annotation.AnnotationTarget.VALUE_PARAMETER
 
 /**
- * @author  jieyi
- * @since   09/11/18
+ * @author jieyi
+ * @since 09/11/18
  */
 object DrawableDirectionConst {
     const val DRAWABLE_DIRECTION_START = 0x1
@@ -36,7 +36,7 @@ fun TextView.addDrawable(
     color: Int,
     @DrawableDirection direct: Int,
     ratioWidth: Float = 1f,
-    ratioHeight: Float = 1f
+    ratioHeight: Float = 1f,
 ) {
     // Modify the icon size.
     context.scaledDrawable(drawableId, ratioWidth, ratioHeight)
@@ -59,7 +59,7 @@ fun TextView.addDrawable(
     @DrawableRes drawableId: Int,
     @DrawableDirection direct: Int,
     ratioWidth: Float = 1f,
-    ratioHeight: Float = 1f
+    ratioHeight: Float = 1f,
 ) = addDrawable(drawableId, 0, direct, ratioWidth, ratioHeight)
 
 fun TextView.addDrawableWithIntrinsicBounds(
@@ -67,7 +67,7 @@ fun TextView.addDrawableWithIntrinsicBounds(
     color: Int,
     @DrawableDirection direct: Int,
     ratioWidth: Float = 1f,
-    ratioHeight: Float = 1f
+    ratioHeight: Float = 1f,
 ) {
     // Modify the icon size.
     context.scaledDrawable(drawableId, ratioWidth, ratioHeight)
@@ -90,5 +90,5 @@ fun TextView.addDrawableWithIntrinsicBounds(
     @DrawableRes drawableId: Int,
     @DrawableDirection direct: Int,
     ratioWidth: Float = 1f,
-    ratioHeight: Float = 1f
+    ratioHeight: Float = 1f,
 ) = addDrawableWithIntrinsicBounds(drawableId, 0, direct, ratioWidth, ratioHeight)

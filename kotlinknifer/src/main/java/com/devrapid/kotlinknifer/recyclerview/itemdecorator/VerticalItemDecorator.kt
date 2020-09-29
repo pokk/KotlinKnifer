@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class VerticalItemDecorator(
     private val topBottom: Int,
-    private val leftRight: Int = topBottom
+    private val leftRight: Int = topBottom,
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         val position: Int = parent.getChildAdapterPosition(view)

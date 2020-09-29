@@ -20,7 +20,7 @@ import kotlin.reflect.KProperty
  */
 class SoftRef<T>(
     default: T? = null,
-    private val queue: ReferenceQueue<T>? = null
+    private val queue: ReferenceQueue<T>? = null,
 ) : ReadWriteProperty<Any?, T?> {
     private var variable: SoftReference<T>?
 
@@ -50,7 +50,7 @@ class SoftRef<T>(
  */
 class WeakRef<T>(
     default: T? = null,
-    private val queue: ReferenceQueue<T>? = null
+    private val queue: ReferenceQueue<T>? = null,
 ) : ReadWriteProperty<Any?, T?> {
     private var variable: WeakReference<T>?
 
@@ -80,7 +80,7 @@ class WeakRef<T>(
  */
 class PhantomRef<T>(
     default: T? = null,
-    private val queue: ReferenceQueue<T>
+    private val queue: ReferenceQueue<T>,
 ) : ReadWriteProperty<Any?, T?> {
     private var variable: PhantomReference<T>?
 

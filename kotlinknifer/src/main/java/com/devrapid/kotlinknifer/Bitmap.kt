@@ -25,8 +25,9 @@ import androidx.palette.graphics.Palette
 import java.io.ByteArrayOutputStream
 
 fun Resources.createBitmap(
-    drawableResId: Int, opts: BitmapFactory.Options? = null,
-    rect: Rect? = null
+    drawableResId: Int,
+    opts: BitmapFactory.Options? = null,
+    rect: Rect? = null,
 ): Bitmap? {
     var bitmap: Bitmap? = null
     openRawResource(drawableResId).use {
@@ -67,7 +68,7 @@ fun Bitmap.scale(ratio: Float) = scale(ratio, ratio)
 fun Resources.createCompressedBitmap(
     @DrawableRes drawableResId: Int,
     simpleSize: Int = 1,
-    bitmapConf: Bitmap.Config? = null
+    bitmapConf: Bitmap.Config? = null,
 ): Bitmap {
     val opts = BitmapFactory.Options().apply {
         inJustDecodeBounds = false
@@ -89,7 +90,7 @@ fun Resources.createScaledBitmap(@DrawableRes drawableResId: Int, ratio: Float) 
 fun Resources.createRegionBitmap(
     drawableResId: Int,
     rect: Rect,
-    opts: BitmapFactory.Options = BitmapFactory.Options()
+    opts: BitmapFactory.Options = BitmapFactory.Options(),
 ) = openRawResource(drawableResId).use {
     // Create a region decoder.
     val decoder = BitmapRegionDecoder.newInstance(it, false)
@@ -111,15 +112,18 @@ fun Bitmap.toBytes(format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG, qu
 fun Bitmap.resizeImageAsRatio(aspectRatio: Double): Bitmap = also {
     val ratio: Double = it.width.toDouble() / it.height.toDouble()
 
-    if (ratio > aspectRatio)
+    if (ratio > aspectRatio) {
         it.width = (aspectRatio * it.height).toInt()
-    else
+    }
+    else {
         it.height = (it.width / aspectRatio).toInt()
+    }
 }
 
 fun Bitmap?.safeRecycle() {
-    if (this != null && !isRecycled)
+    if (this != null && !isRecycled) {
         recycle()
+    }
 }
 
 fun Bitmap.decorateGradientMask(shaderDst: Shader): Bitmap {

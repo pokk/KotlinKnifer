@@ -8,16 +8,22 @@ fun logi(vararg msg: Any?) = Logs.i(*msg)
 fun logw(vararg msg: Any?) = Logs.w(*msg)
 fun loge(vararg msg: Any?) = Logs.e(*msg)
 
+fun logv(msg: Any?) = Logs.v(msg)
+fun logd(msg: Any?) = Logs.d(msg)
+fun logi(msg: Any?) = Logs.i(msg)
+fun logw(msg: Any?) = Logs.w(msg)
+fun loge(msg: Any?) = Logs.e(msg)
+
 internal object Logs {
-    var _IS_DEBUG = true  // Debug mode's switch, default is turn off.
-    var TAG = "MY_LOG"  // TAG
+    var _IS_DEBUG = true // Debug mode's switch, default is turn off.
+    var TAG = "MY_LOG" // TAG
     private const val COLON = ":"
     private const val LEFT_PARENTHESIS = "("
     private const val RIGHT_PARENTHESIS = ")"
     private const val SPACE_STRING = " "
     private const val METHOD_INDEX = 4
-    private val lockLog = Any()  // Avoid the threading's race condition.
-    private val strBuilder = StringBuilder()  // String builder.
+    private val lockLog = Any() // Avoid the threading's race condition.
+    private val strBuilder = StringBuilder() // String builder.
 
     /**
      * VERBOSE log.
@@ -53,10 +59,12 @@ internal object Logs {
      * @param msg output message
      */
     internal fun e(vararg msg: Any?) {
-        if (1 == msg.size && msg[0] is Exception)
+        if (1 == msg.size && msg[0] is Exception) {
             LogWrapper().debugCheck(Log::class.java, getExceptionMsg(msg[0] as Exception))
-        else
+        }
+        else {
             showLog(*msg)
+        }
     }
 
     /**
@@ -73,11 +81,12 @@ internal object Logs {
         fun debugCheck(cls: Class<*>, msg: Any): Boolean {
             // Checking the debug mode.
             if (_IS_DEBUG) {
-                // Because the level of the function depth, the index is 4. 
+                // Because the level of the function depth, the index is 4.
                 var methodName = Thread.currentThread().stackTrace[METHOD_INDEX].methodName.substringBefore("$")
                 // Only exception msg only is 3.
-                if (1 < methodName.length)
+                if (1 < methodName.length) {
                     methodName = Thread.currentThread().stackTrace[METHOD_INDEX - 1].methodName.substringBefore("$")
+                }
                 // Avoid the race condition.
                 synchronized(lockLog) {
                     return logMsg(cls, methodName, msg)

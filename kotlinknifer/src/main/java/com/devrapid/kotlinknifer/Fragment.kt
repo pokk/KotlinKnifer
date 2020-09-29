@@ -28,7 +28,7 @@ fun FragmentManager.addFragment(
     needBack: Boolean = false,
     fragmentStack: Stack<Fragment>? = null,
     sharedElements: HashMap<View, String> = hashMapOf(),
-    block: ((FragmentTransaction) -> Unit)? = null
+    block: ((FragmentTransaction) -> Unit)? = null,
 ) = transaction {
     block?.invoke(this)
     sharedElements.forEach { value -> addSharedElement(value.key, value.value) }

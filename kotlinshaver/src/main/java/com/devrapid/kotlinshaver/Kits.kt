@@ -19,7 +19,7 @@ inline fun Any?.isNull() = null == this
 
 inline fun Any?.isNotNull() = null != this
 
-@ExperimentalContracts
+@OptIn(ExperimentalContracts::class)
 inline fun Any?.isNullExp(): Boolean {
     contract {
         returns(false) implies (this@isNullExp == null)
@@ -27,7 +27,7 @@ inline fun Any?.isNullExp(): Boolean {
     return null == this
 }
 
-@ExperimentalContracts
+@OptIn(ExperimentalContracts::class)
 inline fun Any?.isNotNullExp(): Boolean {
     contract {
         returns(true) implies (this@isNotNullExp != null)

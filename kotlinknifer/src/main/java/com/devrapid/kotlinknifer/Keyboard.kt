@@ -37,13 +37,3 @@ fun isShowingSoftKeyboard(rootView: View): Boolean {
 inline fun Context.toggleSoftKeyboard() =
     (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
         .toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-
-// FIXME(jieyi): 2018/01/23 Those functions don't work well.
-//inline fun Context.hideSoftKeyboard() = if (isShowingSoftKeyboard()) toggleSoftKeyboard() else Unit
-//
-//inline fun Context.showSoftKeyboard() = if (isHidingSoftKeyboard()) toggleSoftKeyboard() else Unit
-//
-//inline fun Context.isHidingSoftKeyboard() = !isShowingSoftKeyboard()
-//
-//inline fun Context.isShowingSoftKeyboard() =
-//    (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).isAcceptingText

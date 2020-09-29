@@ -21,7 +21,8 @@ fun Activity.showViewStub(@IdRes stub: Int, @IdRes realView: Int, options: (View
 }
 
 fun Fragment.showViewStub(@IdRes stub: Int, @IdRes realView: Int, options: (View.() -> Unit)? = null) {
-    (requireNotNull(view).findViewById<ViewStub>(stub)?.inflate() ?: requireNotNull(view).findViewById(realView)).apply {
+    (requireNotNull(view).findViewById<ViewStub>(stub)
+         ?.inflate() ?: requireNotNull(view).findViewById(realView)).apply {
         visible()
         bringToFront()
         options?.let(this::apply)

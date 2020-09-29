@@ -18,8 +18,9 @@ class GridSpacingItemDecorator(private val spanCount: Int, private val spacing: 
             // (column + 1) * ((1f / spanCount) * spacing).
             outRect.right = (column + 1) * spacing / spanCount
             // top edge.
-            if (position < spanCount)
+            if (position < spanCount) {
                 outRect.top = spacing
+            }
             // item bottom.
             outRect.bottom = spacing
         }
@@ -29,8 +30,9 @@ class GridSpacingItemDecorator(private val spanCount: Int, private val spacing: 
             // spacing - (column + 1) * ((1f / spanCount) * spacing).
             outRect.right = spacing - (column + 1) * spacing / spanCount
             // item top.
-            if (position >= spanCount)
+            if (position >= spanCount) {
                 outRect.top = spacing
+            }
         }
     }
 }

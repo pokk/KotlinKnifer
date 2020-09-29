@@ -79,9 +79,9 @@ fun Context.alert(message: Int, title: Int? = null, init: (AlertDialog.Builder.(
         init?.let { init() }
     }
 
-inline fun Context.navigationBarHeiht() = getIdentifier("navigation_bar_height", "dimen", "android")
-                                              .takeIf { 0 < it }
-                                              ?.let { getDimenPixelSize(it) } ?: 0
+inline fun Context.navigationBarHeight() = getIdentifier("navigation_bar_height", "dimen", "android")
+                                               .takeIf { 0 < it }
+                                               ?.let { getDimenPixelSize(it) } ?: 0
 
 inline fun Context.statusBarHeight() = getIdentifier("status_bar_height", "dimen", "android")
                                            .takeIf { 0 < it }
@@ -98,7 +98,7 @@ fun Activity.changeStatusBarColor(@ColorInt color: Int, ratio: Float = 1f) =
     setStatusBarColorBy { statusBarColor = color.ofAlpha(ratio) }
 
 internal inline fun Activity.setStatusBarColorBy(block: Window.() -> Unit) {
-    if (Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT)
+    if (Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT) {
         window.apply {
             clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -106,6 +106,7 @@ internal inline fun Activity.setStatusBarColorBy(block: Window.() -> Unit) {
             // For not opaque(transparent) color.
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
+    }
     else {
         TODO("Don't support the sdk version is less than 21 yet.")
     }

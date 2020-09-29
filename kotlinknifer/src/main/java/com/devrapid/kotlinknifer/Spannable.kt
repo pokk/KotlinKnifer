@@ -17,7 +17,7 @@ inline fun TextView.withMovement() = apply {
 inline fun TextView.parseAsHtml(
     flags: Int = HtmlCompat.FROM_HTML_MODE_LEGACY,
     imageGetter: Html.ImageGetter? = null,
-    tagHandler: Html.TagHandler? = null
+    tagHandler: Html.TagHandler? = null,
 ) = apply {
     text = text.toString().parseAsHtml(flags, imageGetter, tagHandler)
 }

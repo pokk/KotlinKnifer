@@ -11,7 +11,7 @@ class WrapContentLinearLayoutManager @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    defStyleRes: Int = 0,
 ) : LinearLayoutManager(context, attrs, defStyleAttr, defStyleRes) {
     // FIXED(jieyi): 9/23/17 Workaround for fixing the android original recycler view problem.
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {

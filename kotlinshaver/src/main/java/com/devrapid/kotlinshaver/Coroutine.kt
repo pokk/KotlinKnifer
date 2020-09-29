@@ -19,7 +19,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 inline fun gLaunch(
     context: CoroutineContext = EmptyCoroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
-    noinline block: suspend CoroutineScope.() -> Unit
+    noinline block: suspend CoroutineScope.() -> Unit,
 ) = GlobalScope.launch(context, start, block)
 
 inline fun ui(noinline block: suspend CoroutineScope.() -> Unit) =
@@ -39,7 +39,7 @@ inline fun io(noinline block: suspend CoroutineScope.() -> Unit) =
 inline fun <T> gAsync(
     context: CoroutineContext = EmptyCoroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
-    noinline block: suspend CoroutineScope.() -> T
+    noinline block: suspend CoroutineScope.() -> T,
 ) = GlobalScope.async(context, start, block)
 
 inline fun <T> uiAsync(noinline block: suspend CoroutineScope.() -> T) =

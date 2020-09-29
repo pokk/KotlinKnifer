@@ -15,7 +15,7 @@ import kotlin.math.pow
 fun View.registerCircularRevealAnimation(
     revealSettings: RevealAnimationSetting,
     startColor: Int,
-    endColor: Int
+    endColor: Int,
 ) {
     val duration = 1000L
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -29,7 +29,7 @@ fun View.registerCircularRevealAnimation(
                 oldLeft: Int,
                 oldTop: Int,
                 oldRight: Int,
-                oldBottom: Int
+                oldBottom: Int,
             ) {
                 v.removeOnLayoutChangeListener(this)
                 val (cx, cy, width, height) = revealSettings
@@ -50,7 +50,7 @@ fun View.startCircularExitAnimation(
     revealSettings: RevealAnimationSetting,
     startColor: Int,
     endColor: Int,
-    listener: () -> Unit
+    listener: () -> Unit,
 ) {
     val duration = 1000L
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -78,7 +78,7 @@ fun View.startCircularExitAnimation(
 fun View.startColorAnimation(
     startColor: Int,
     endColor: Int,
-    duration: Long
+    duration: Long,
 ) {
     ValueAnimator().apply {
         this.duration = duration
@@ -92,7 +92,7 @@ data class RevealAnimationSetting(
     var centerX: Int,
     var centerY: Int,
     var width: Int,
-    var height: Int
+    var height: Int,
 ) : Parcelable {
     companion object CREATOR : Parcelable.Creator<RevealAnimationSetting> {
         override fun createFromParcel(parcel: Parcel) = RevealAnimationSetting(parcel)
