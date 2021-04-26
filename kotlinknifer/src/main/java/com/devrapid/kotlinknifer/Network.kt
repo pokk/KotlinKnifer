@@ -5,15 +5,14 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import com.devrapid.kotlinshaver.cast
-import com.devrapid.kotlinshaver.isNotNull
 
 @SuppressLint("MissingPermission")
 fun Context.activeNetworkInfo() =
     (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
 
-fun Context.isWifiConnected() = activeNetworkInfo().run { isNotNull() && ConnectivityManager.TYPE_WIFI == type }
+fun Context.isWifiConnected() = activeNetworkInfo().run { this != null && ConnectivityManager.TYPE_WIFI == type }
 
-fun Context.isConnected() = activeNetworkInfo().run { isNotNull() && isConnected }
+fun Context.isConnected() = activeNetworkInfo().run { this != null && isConnected }
 
 @SuppressLint("MissingPermission")
 fun hasNetwork(context: Context): Boolean {

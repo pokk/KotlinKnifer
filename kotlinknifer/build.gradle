@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 30
     }
     buildTypes {
         release {
@@ -33,10 +33,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     implementation "androidx.appcompat:appcompat:1.2.0"
-    implementation "androidx.core:core-ktx:1.3.1"
-    implementation "androidx.recyclerview:recyclerview:1.2.0-alpha05"
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.recyclerview:recyclerview:1.2.0"
     implementation "androidx.palette:palette-ktx:1.0.0"
     api project(":kotlinshaver")
 }
 
-apply from: 'https://raw.githubusercontent.com/pokk/JCenterUploader/master/Uploader.gradle'
+//apply from: 'https://raw.githubusercontent.com/pokk/JCenterUploader/master/Uploader.gradle'

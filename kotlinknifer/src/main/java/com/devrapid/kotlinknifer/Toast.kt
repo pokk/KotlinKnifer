@@ -10,7 +10,7 @@ fun Context.buildCustomToast(customLayoutId: Int, tvId: Int, msg: String, durati
     Toast(this).apply {
         setGravity(Gravity.BOTTOM, 0, (16 * resources.displayMetrics.density).toInt())
         duration = durationTime
-        view = LayoutInflater.from(view.context).inflate(customLayoutId, null).apply {
+        view = LayoutInflater.from(requireNotNull(view).context).inflate(customLayoutId, null).apply {
             findViewById<TextView>(tvId).apply { text = msg }
         }
     }
