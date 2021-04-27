@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: "maven-publish"
+apply plugin: 'com.vanniktech.maven.publish'
 apply from: "../util.gradle"
+
+ext["signing.keyId"] = getProps("signing.keyId")
+ext["signing.password"] = getProps("signing.password")
+ext["signing.secretKeyRingFile"] = getProps("signing.secretKeyRingFile")
 
 android {
     compileSdkVersion 30
@@ -18,91 +22,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-}
-
-task androidJavadocs(type: Javadoc) {
-    excludes = ['**/*.kt']
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    android.libraryVariants.all { variant ->
-        if (variant.name == 'release') {
-            owner.classpath += variant.javaCompile.classpath
-        }
-    }
-    exclude '**/R.html', '**/R.*.html', '**/index.html'
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-    from androidJavadocs.destinationDir
-    classifier 'javadoc'
-}
-
-task androidSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-// Because the components are created only during the afterEvaluate phase, you must
-// configure your publications using the afterEvaluate() lifecycle method.
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-                // You can then customize attributes of the publication as shown below.
-                groupId = findProperty("proj_group")
-                artifactId = findProperty("proj_artifactid")
-                version = findProperty("proj_version")
-
-                pom {
-                    name = findProperty("proj_artifactid")
-                    description = findProperty("proj_description")
-                    url = findProperty("proj_websiteurl")
-                    licenses {
-                        license {
-                            name = findProperty("license_name")
-                            url = findProperty("license_url")
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = findProperty("developer_id")
-                            name = findProperty("developer_name")
-                            email = findProperty("developer_email")
-                        }
-                    }
-                    // Version control info, if you're using GitHub, follow the format as seen here
-                    scm {
-                        connection = findProperty("scm_connection")
-                        developerConnection = findProperty("scm_developer_connection")
-                        url = findProperty("scm_url")
-                    }
-                }
-            }
-        }
-        repositories {
-            // The repository to publish to, Sonatype/MavenCentral
-            maven {
-                // This is an arbitrary name, you may also use "mavencentral" or
-                // any other name that's descriptive for you
-                name = "sonatype"
-
-                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                // You only need this if you want to publish snapshots, otherwise just set the URL
-                // to the release repo directly
-                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-
-                // The username and password we've fetched earlier
-                credentials {
-                    username getProps("ARTIFACTORY_USERNAME")
-                    password getProps("ARTIFACTORY_PASSWORD")
-                }
-            }
-        }
     }
 }
 
