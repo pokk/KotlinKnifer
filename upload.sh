@@ -1,2 +1,1 @@
-./gradlew
-./gradlew bintrayUpload
+./gradlew uploadArchives
