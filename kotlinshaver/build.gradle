@@ -1,40 +1,21 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply from: "../util.gradle"
+
+ext["signing.keyId"] = getProps("signing.keyId")
+ext["signing.password"] = getProps("signing.password")
+ext["signing.secretKeyRingFile"] = getProps("signing.secretKeyRingFile")
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
-// Bintray User Info
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-// Bintray Project Info
-Properties gradleProperties = new Properties()
-gradleProperties.load(project.rootProject.file('gradle.properties').newDataInputStream())
-
-version = gradleProperties.getProperty("proj_version")
-group = gradleProperties.getProperty("proj_group")
-
-if (project.hasProperty("android")) { // Android libraries
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-} else { // Java libraries
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -43,6 +24,78 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-//    archives javadocJar
     archives sourcesJar
+    archives javadocJar
 }
+
+signing {
+    sign publishing.publications
+}
+
+// Because the components are created only during the afterEvaluate phase, you must
+// configure your publications using the afterEvaluate() lifecycle method.
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            libraryJar(MavenPublication) {
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+                // You can then customize attributes of the publication as shown below.
+                groupId = findProperty("GROUP")
+                artifactId = findProperty("proj_kotlin_name")
+                version = findProperty("VERSION_NAME")
+
+                pom {
+                    name = findProperty("proj_kotlin_name")
+                    description = findProperty("POM_DESCRIPTION")
+                    url = findProperty("POM_URL")
+                    licenses {
+                        license {
+                            name = findProperty("POM_LICENCE_NAME")
+                            url = findProperty("POM_LICENCE_URL")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = findProperty("POM_DEVELOPER_ID")
+                            name = findProperty("POM_DEVELOPER_NAME")
+                            url = findProperty("POM_DEVELOPER_URL")
+                        }
+                    }
+                    // Version control info, if you're using GitHub, follow the format as seen here
+                    scm {
+                        url = findProperty("POM_SCM_URL")
+                        connection = findProperty("POM_SCM_CONNECTION")
+                        developerConnection = findProperty("POM_SCM_DEV_CONNECTION")
+                    }
+                }
+            }
+        }
+        repositories {
+            // The repository to publish to, Sonatype/MavenCentral
+            maven {
+                // This is an arbitrary name, you may also use "mavencentral" or
+                // any other name that's descriptive for you
+                name = "sonatype"
+
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                // You only need this if you want to publish snapshots, otherwise just set the URL
+                // to the release repo directly
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                // The username and password we've fetched earlier
+                credentials {
+                    username getProps("mavenCentralUsername")
+                    password getProps("mavenCentralPassword")
+                }
+            }
+        }
+    }
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
