@@ -36,5 +36,5 @@ dependencies {
     implementation "androidx.core:core-ktx:1.3.2"
     implementation "androidx.recyclerview:recyclerview:1.2.0"
     implementation "androidx.palette:palette-ktx:1.0.0"
-    api project(":kotlinshaver")
+    api "studio.pokkbaby:kotlinshaver:2.3.0"
 }
