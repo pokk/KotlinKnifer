@@ -1,16 +1,8 @@
 # KotlinKnifer
 
-[![GitHub release](https://img.shields.io/github/release/pokk/KotlinKnifer.svg?style=flat-square)](https://github.com/pokk/KotlinKnifer)
 [![license](https://img.shields.io/github/license/pokk/KotlinKnifer.svg?style=flat-square)](https://github.com/pokk/KotlinKnifer)
-![Gson](https://img.shields.io/badge/Gson-2.8.2-green.svg?style=flat-square)
-![RxJava](https://img.shields.io/badge/RxJava-2.1.8-green.svg?style=flat-square)
-![RxKotlin](https://img.shields.io/badge/RxKotlin-2.2.0-green.svg?style=flat-square)
 
-# ⚠️ Deprecated AppCompat library
-
-We don't support AppCompat library, from Kotlin 1.3.0. All android libraries change to AndroidX.
-
-
+### KotlinKnifer  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/studio.pokkbaby/kotlinknifer/badge.svg)](https://maven-badges.herokuapp.com/maven-central/studio.pokkbaby/kotlinknifer)<br/>KotlinShaver [![Maven Central](https://maven-badges.herokuapp.com/maven-central/studio.pokkbaby/kotlinshaver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/studio.pokkbaby/kotlinshaver)
 
 The library has util tools as below:
 
@@ -86,7 +78,7 @@ First you have to make sure your project `bundle.gradle` as below:
 ```gradle
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 ```
@@ -94,8 +86,8 @@ allprojects {
 And add our dependency to your app `bundle.gradle`.
 
 ```gradle
-implementation 'com.devrapid.jieyi:kotlinknifer:[last_version]'
-implementation 'com.devrapid.jieyi:kotlinshaver:[last_version]'
+implementation 'studio.pokkbaby:kotlinknifer:[last_version]'
+implementation 'studio.pokkbaby:kotlinshaver:[last_version]'
 ```
 
 Then you can use it!!!
@@ -116,14 +108,14 @@ Then you can use it!!!
 If you'd not like to use them to your project, you can add the exclude as like below
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinknifer:[last_version]', {
+implementation('studio.pokkbaby:kotlinknifer:[last_version]', {
   exclude group: 'com.google.code.gson', module: 'gson'
   exclude group: 'com.github.bumptech.glide', module: 'glide'
 })
 ```
 
 ```gradle
-implementation('com.devrapid.jieyi:kotlinshaverr:[last_version]', {
+implementation('studio.pokkbaby:kotlinshaverr:[last_version]', {
   exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
   exclude group: 'io.reactivex.rxjava2', module: 'rxkotlin'
 })
@@ -139,7 +131,7 @@ Please let me know, thank you!
 # License
 
 ```
-Copyright (C) 2018 Jieyi Wu
+Copyright (C) 2021 Jieyi Wu
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
